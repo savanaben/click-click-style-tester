@@ -1,0 +1,261 @@
+
+body, html {
+    height: 100%;
+    margin: 0 7% 0 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Existing styles */
+
+p {
+    margin: 0px;
+}
+ul {
+    margin:0px
+}
+
+
+.css-8znkpr {
+    align-content: flex-start;
+    align-items: center;
+    background-color: rgb(235, 235, 235);
+    border: 0.8px solid rgb(199, 199, 199);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 5px 0px;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    column-gap: 4px;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    justify-content: flex-start;
+    line-height: 26.4px;
+    margin: 0px;
+    padding: 8px;
+    position: relative;
+    row-gap: 4px;
+    text-decoration-skip-ink: none;
+    text-rendering: optimizelegibility;
+    z-index: 200;
+}
+
+.css-grb9ji {
+    
+    /*
+    background-color: rgb(36, 120, 204);
+    */
+    background-color: #085EB4;
+    box-sizing: border-box;
+    margin: 8px;
+    color: rgb(255, 255, 255);
+    cursor: pointer; /* Updated cursor style */
+    display: flex;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26.4px;
+border-style:none;
+    padding: 16px 32px;
+    text-align: start;
+    text-decoration-skip-ink: none;
+    text-rendering: optimizelegibility;
+    user-select: none;
+    outline: none; /* Removes default browser focus outline */
+}
+
+
+
+.css-grb9ji-selected {
+    outline-style: solid;
+    outline-width: 3px;
+   
+   /*
+    background-color: #2895FB;
+    outline-color: #00458A;
+   */
+   
+   background-color: #0F75DB;
+   outline-color: #002D57;
+
+    z-index: 10000;
+    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+}
+
+
+
+
+.css-grb9ji:focus-visible::after {
+    content: '';
+    position: absolute;
+    left: -7px;   /* Adjust these values */
+    top: -7px;    /* Adjust these values */
+    right: -7px;  /* Adjust these values */
+    bottom: -7px; /* Adjust these values */
+    border: 2px solid #00458A;
+    outline-color: white;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: -4px;
+}
+
+.css-grb9ji {
+    position: relative; /* Needed for absolute positioning of ::after */
+    /* Rest of your styles */
+}
+
+
+
+
+
+.drag-location {
+
+    align-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    column-gap: 4px;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    justify-content: flex-start;
+    line-height: 26.4px;
+    margin-top: 24px;
+    padding: 8px;
+    position: relative;
+    row-gap: 4px;
+    text-decoration-skip-ink: none;
+    text-rendering: optimizelegibility;
+    z-index: 200;
+}
+
+.hidden-text {
+    visibility: hidden;
+}
+
+.target {
+    border: 2px solid rgb(28, 28, 28);
+    background-color: white;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px; /* Same padding as draggable buttons */
+    box-sizing: border-box;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    line-height: 26.4px;
+    font-weight: 700;
+}
+
+.target-highlighted {
+outline: solid;
+background-color: #d1e9ff;
+outline-width: 4px;
+outline-offset: -4px;
+outline-color:#00458A;
+}
+
+.target-highlighted:hover {
+    outline: solid;
+    background-color: #b0d9ff;
+    cursor: pointer;
+    outline-width: 6px;
+    outline-offset: -6px;
+    outline-color:#0066cd;
+}
+
+
+
+.target-dragged-over {
+    outline: solid;
+    background-color: #b0d9ff;
+    outline-width: 6px;
+    outline-offset: -6px;
+    outline-color:#0066cd;
+}
+
+
+.target:focus-visible::after {
+    content: '';
+    position: absolute;
+    left: -4px; 
+    top: -4px; 
+    right: -4px; 
+    bottom: -4px; 
+    border: 2px dashed #00458A;
+    outline-offset: -2px;
+}
+
+
+
+
+
+
+
+
+.SVG-default-style {
+    /* Define your SVG default styles here */
+    cursor: pointer;
+    line-height: 0px;
+    /* Other styles as needed */
+    outline: none; /* Removes default browser focus outline */
+}
+
+/* Styles for selected SVG draggables */
+.SVG-default-style-selected {
+    outline-style: solid;
+    outline-width: 3px;
+    outline-offset: 1px;
+    background-color: white;
+    outline-color: #002D57;
+    z-index: 10000;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, 0.23);
+}
+
+
+
+
+
+
+.SVG-focus-state:focus-visible::after {
+    content: '';
+    position: absolute;
+    left: -8px;   /* Adjust these values */
+    top: -8px;    /* Adjust these values */
+    right: -8px;  /* Adjust these values */
+    bottom: -8px; /* Adjust these values */
+    border: 2px solid #00458A;
+    outline-color: white;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: -4px;
+    z-index: 1000;
+}
+
+.SVG-default-style {
+    position: relative; /* Needed for absolute positioning of ::after */
+    /* Rest of your styles */
+}
+
+.svg-drop-zone {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: gray;
+    padding: 8px;
+    border: dashed black 1px;
+    border-radius: 6px;
+}

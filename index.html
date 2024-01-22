@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Component</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+    
+    <div class="main-container">
+
+<p>Note - BG leaning away from allowing tab movement in addition to focus group on targets. Allowing tab movement as well means you either have to </p>
+    <ul>
+        <li>deselect a source when you tab out of the match group (potential for deselecting pre-maturely if you accidentally tab 1 stop past the targets), or</li>
+        <li>leave the source in the active state even if you tab out of the match activity. This feels somewhat incomplete/wrong to me.</li>
+    </ul>
+
+
+        <div id="svg-drop-zone-1x" class="svg-drop-zone">
+            Drag and Drop SVG Here (1x Size)
+        </div>
+        <div id="svg-drop-zone-2x" class="svg-drop-zone">
+            Drag and Drop SVG Here (2x Size)
+        </div>
+        <button type="button">Focusable element</button>
+
+        <div data-component="DropZone" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-1" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
+                Choice A
+            </button>
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-2" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice B
+            </button>
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-3" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice C
+            </button>
+        </div>
+        
+
+        <div class="drag-location" role="radiogroup">
+            <div class="target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
+            <div class="target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
+            <div class="target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice C</span></div>
+        </div>
+        
+        <button type="button">Focusable element</button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
