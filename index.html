@@ -12,7 +12,9 @@
 
 
     
-    <div class="main-container">
+<div class="main-container">
+
+<!--
 
 <p>Note - BG leaning away from allowing tab movement in addition to focus group on targets. Allowing tab movement as well means you either have to </p>
     <ul>
@@ -20,15 +22,31 @@
         <li>leave the source in the active state even if you tab out of the match activity. This feels somewhat incomplete/wrong to me.</li>
     </ul>
 
+    <p>1/22/2024 design team notes </p>
+    <ul>
+        <li>need hover states for draggables</li>
+        <li>is the dragging state any different from the click-selected state?</li>
+        <li>what if the source is repeatable and there is no gap in the source container. sources in the drop container likley will just be inactive and if you clicked on them, you'd return the draggable to the container. Probably will have to dim the repeated source? </li>
+    </ul>
 
+-->
+
+<h2>Click Click Prototype</h2>
         <div id="svg-drop-zone-1x" class="svg-drop-zone">
-            Drag and Drop SVG Here (1x Size)
+            Drag and drop SVG here to test (1x Size)
         </div>
         <div id="svg-drop-zone-2x" class="svg-drop-zone">
-            Drag and Drop SVG Here (2x Size)
+            Drag and drop SVG here to test (2x Size)
         </div>
-        <button type="button">Focusable element</button>
-
+       
+       
+       
+       
+        <button type="button" class="button-default">Focusable element</button>
+        
+        
+        
+    <div class="drag-drop-set">
         <div data-component="DropZone" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
             <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-1" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
                 Choice A
@@ -41,14 +59,57 @@
             </button>
         </div>
         
-
         <div class="drag-location" role="radiogroup">
             <div class="target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
             <div class="target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
             <div class="target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice C</span></div>
         </div>
+    </div>
+
+
+        <button type="button" class="button-default">Focusable element</button>
+
+        <br> 
+        <br> 
+        <br> 
+        <br> 
+        <br> 
+
+        <button type="button" class="button-default">Focusable element</button>
+
+
+    <div class="drag-drop-set">
+        <div data-component="DropZone" id="source-tray-2" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-4" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
+                Choice A
+            </button>
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-5" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice B
+            </button>
+            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice B
+            </button>
+            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice B
+            </button>
+        </div>
         
-        <button type="button">Focusable element</button>
+        <div class="drag-location" role="radiogroup">
+            <div class="target" id="target4" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
+            <div class="target" id="target5" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice C
+            </button>
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+                Choice D
+            </button>
+        </div>
+    </div>
+
+        <button type="button" class="button-default">Focusable element</button>
+
+        <br>    
+
 
 </div>
 

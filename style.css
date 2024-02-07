@@ -1,14 +1,23 @@
 
 body, html {
-    height: 100%;
-    margin: 0 7% 0 7%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-default {
+    background-color: white;
+    border-color: white;
+    border-style: none;
+    color: rgb(167, 167, 167);
+    font-style: italic;
 }
 
 .main-container {
     display: flex;
+
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -20,6 +29,8 @@ body, html {
 p {
     margin: 0px;
 }
+
+
 ul {
     margin:0px
 }
@@ -31,7 +42,6 @@ ul {
     background-color: rgb(235, 235, 235);
     border: 0.8px solid rgb(199, 199, 199);
     border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 5px 0px;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
     column-gap: 4px;
@@ -43,6 +53,7 @@ ul {
     justify-content: flex-start;
     line-height: 26.4px;
     margin: 0px;
+    
     padding: 8px;
     position: relative;
     row-gap: 4px;
@@ -95,7 +106,6 @@ border-style:none;
 
 
 
-
 .css-grb9ji:focus-visible::after {
     content: '';
     position: absolute;
@@ -115,7 +125,9 @@ border-style:none;
     /* Rest of your styles */
 }
 
-
+.css-grb9ji:hover {
+    background-color: #0F75DB;
+}
 
 
 
@@ -142,12 +154,19 @@ border-style:none;
     z-index: 200;
 }
 
+.drag-drop-set {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .hidden-text {
     visibility: hidden;
 }
 
 .target {
-    border: 2px solid rgb(28, 28, 28);
+    border: 2px solid #545454;
     background-color: white;
     margin: 8px;
     display: flex;
@@ -159,6 +178,7 @@ border-style:none;
     font-size: 24px;
     line-height: 26.4px;
     font-weight: 700;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.08);
 }
 
 .target-highlighted {
@@ -178,7 +198,21 @@ outline-color:#00458A;
     outline-color:#0066cd;
 }
 
+.draggable-highlighted {
+    outline: solid;
+    outline-color: #00458A;
+    outline-width: 4px;
+    outline-offset: 2px;
+    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+}
 
+.draggable-highlighted:hover {
+    outline: solid;
+    outline-color: #006ad3;
+    outline-width: 6px;
+    outline-offset: 2px;
+    background-color: #658db5;
+}
 
 .target-dragged-over {
     outline: solid;
@@ -192,12 +226,15 @@ outline-color:#00458A;
 .target:focus-visible::after {
     content: '';
     position: absolute;
-    left: -4px; 
-    top: -4px; 
-    right: -4px; 
-    bottom: -4px; 
-    border: 2px dashed #00458A;
-    outline-offset: -2px;
+    left: -7px;   /* Adjust these values */
+    top: -7px;    /* Adjust these values */
+    right: -7px;  /* Adjust these values */
+    bottom: -7px; /* Adjust these values */
+    border: 2px solid #00458A;
+    outline-color: white;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: -4px;
 }
 
 
@@ -219,7 +256,7 @@ outline-color:#00458A;
 .SVG-default-style-selected {
     outline-style: solid;
     outline-width: 3px;
-    outline-offset: 1px;
+    outline-offset: 2px;
     background-color: white;
     outline-color: #002D57;
     z-index: 10000;

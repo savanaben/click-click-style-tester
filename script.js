@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     setupSVGDropZone('svg-drop-zone-1x', false);
     setupSVGDropZone('svg-drop-zone-2x', true);
@@ -24,12 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
     setupKeyboardNavigation();
 
-
 });
+
 
 
 function targetFocus(event) {
@@ -40,6 +40,30 @@ function targetBlur(event) {
     event.target.classList.remove('target-dragged-over');
 }
 
+
+
+
+
+
+function updateTargetsTabindex(tabindexValue, draggableElement = null) {
+    let targets;
+    if (draggableElement) {
+        // If draggableElement is provided, update tabindex only for targets in the same set
+        const dragDropSet = draggableElement.closest('.drag-drop-set');
+        targets = dragDropSet.querySelectorAll('.target');
+    } else {
+        // If no draggableElement is provided, select all targets
+        targets = document.querySelectorAll('.target');
+    }
+    targets.forEach(target => {
+        target.tabIndex = tabindexValue;
+    });
+}
+
+// Call updateTargetsTabindex with -1 initially to ensure targets are not tabbable by default
+document.addEventListener('DOMContentLoaded', () => {
+    updateTargetsTabindex(-1);
+});
 
 
 function setupKeyboardNavigation() {
@@ -53,14 +77,30 @@ function setupKeyboardNavigation() {
     });
 }
 
-function handleArrowNavigation(event, selectedDraggable) {
-    event.preventDefault();
-    const elements = [selectedDraggable, ...document.querySelectorAll('.target')];
-    const focusedElement = document.activeElement;
-    const focusedIndex = elements.indexOf(focusedElement);
-    const direction = event.key === 'ArrowLeft' ? -1 : 1;
-    const nextIndex = (focusedIndex + direction + elements.length) % elements.length;
-    elements[nextIndex].focus();
+function handleArrowNavigation(event) {
+    const activeElement = document.activeElement;
+    // Find the closest .drag-drop-set container to the currently focused element
+    const currentSet = activeElement.closest('.drag-drop-set');
+    if (!currentSet) return; // Exit if no parent container matches
+
+    // Selecting elements within the current .drag-drop-set container
+    const elements = Array.from(currentSet.querySelectorAll('.target, [data-component="Draggable"][data-selected="true"]'));
+    const focusedIndex = elements.indexOf(activeElement);
+    
+    let nextIndex = focusedIndex; // Default to the current index if no navigation key is pressed
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        // Move focus to the previous item or wrap around to the last item
+        nextIndex = focusedIndex - 1 < 0 ? elements.length - 1 : focusedIndex - 1;
+    } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        // Move focus to the next item or wrap around to the first item
+        nextIndex = (focusedIndex + 1) % elements.length;
+    }
+
+    // Safely attempt to focus the next element in the sequence
+    if(elements[nextIndex]) {
+        event.preventDefault(); // Prevent default arrow key behavior (scrolling)
+        elements[nextIndex].focus();
+    }
 }
 
 
@@ -99,7 +139,7 @@ function replaceDraggablesWithSVG(svgContent, scaleUp) {
     const dropZone = document.querySelector('.css-8znkpr');
     dropZone.innerHTML = ''; // Clear existing content
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         const svgWrapper = document.createElement('div');
         svgWrapper.classList.add('SVG-default-style');
         svgWrapper.innerHTML = svgContent;
@@ -122,6 +162,9 @@ function replaceDraggablesWithSVG(svgContent, scaleUp) {
             }
         }
 
+        // Add the data-component attribute to make it draggable
+        svgWrapper.setAttribute('data-component', 'Draggable');
+
         svgWrapper.draggable = true;
         svgWrapper.tabIndex = 0; // Make it focusable
         svgWrapper.addEventListener('focus', function() {
@@ -130,92 +173,12 @@ function replaceDraggablesWithSVG(svgContent, scaleUp) {
         svgWrapper.addEventListener('blur', function() {
             this.classList.remove('SVG-focus-state');
         });
-        svgWrapper.addEventListener('click', toggleSVGSelection);
+        svgWrapper.addEventListener('click', toggleDraggableSelection);
         svgWrapper.addEventListener('dragstart', dragStart);
         svgWrapper.addEventListener('dragend', dragEnd);
         dropZone.appendChild(svgWrapper);
     }
 }
-
-
-
-
-
-
-
-function toggleDraggableSelection(event) {
-    const isSelected = event.target.classList.contains('css-grb9ji-selected');
-    resetSelectionAndHighlight();
-
-    if (!isSelected) {
-        event.target.classList.add('css-grb9ji-selected');
-        event.target.dataset.selected = "true";
-        highlightAllTargets();
-        event.target.focus(); // Add focus to the selected draggable
-        updateTargetsTabindex(0); // Make targets tabbable
-    } else {
-        updateTargetsTabindex(-1); // Make targets not tabbable
-    }
-}
-
-
-function updateTargetsTabindex(tabindexValue) {
-    document.querySelectorAll('.target').forEach(target => {
-        target.tabIndex = tabindexValue;
-    });
-}
-
-// Call updateTargetsTabindex with -1 initially to ensure targets are not tabbable by default
-document.addEventListener('DOMContentLoaded', () => {
-    updateTargetsTabindex(-1);
-});
-
-
-
-
-function dragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.id);
-    setTimeout(() => event.target.style.visibility = "hidden", 0);
-
-    // Remove the selected state from all draggables
-    resetSelectionAndHighlight();
-
-    // Keep the targets highlighted during dragging
-    highlightAllTargets();
-}
-
-
-
-function dragEnd(event) {
-    event.target.style.visibility = "visible";
-    // Reset the highlighted state only after dragging ends
-    resetSelectionAndHighlight();
-}
-
-function dragOver(event) {
-    event.preventDefault();
-    const target = event.target.closest('.target');
-    if (target) {
-        target.classList.add('target-dragged-over');
-    }
-}
-
-function dragLeave(event) {
-    const target = event.target.closest('.target');
-    if (target) {
-        target.classList.remove('target-dragged-over');
-    }
-}
-
-function drop(event) {
-    event.preventDefault();
-    const target = event.target.closest('.target');
-    if (target) {
-        target.classList.remove('target-dragged-over');
-    }
-}
-
-
 
 function toggleSVGSelection(event) {
     event.stopPropagation();
@@ -227,7 +190,6 @@ function toggleSVGSelection(event) {
     if (!isSelected) {
         parentDiv.classList.add('SVG-default-style-selected');
         parentDiv.dataset.selected = "true";
-        highlightAllTargets(); // Highlight all targets when SVG is selected
     } else {
         parentDiv.classList.remove('SVG-default-style-selected');
         parentDiv.dataset.selected = "false";
@@ -237,11 +199,175 @@ function toggleSVGSelection(event) {
 
 
 
-function highlightAllTargets() {
-    document.querySelectorAll('.target').forEach(target => {
-        target.classList.add('target-highlighted');
+
+
+
+
+
+function toggleDraggableSelection(event) {
+    const target = event.currentTarget; // Use currentTarget to ensure you're getting the element with the event listener
+    const isSelected = target.dataset.selected === "true";
+    resetSelectionAndHighlight();
+
+    if (!isSelected) {
+        // Check if the element is an SVG draggable
+        if (target.classList.contains('SVG-default-style')) {
+            target.classList.add('SVG-default-style-selected');
+        } else {
+            target.classList.add('css-grb9ji-selected');
+        }
+        target.dataset.selected = "true";
+        highlightTargetsForDraggable(target);
+        highlightOthersInDragLocation(target);
+        target.focus();
+        updateTargetsTabindex(0, target);
+    } else {
+        target.dataset.selected = "false";
+        updateTargetsTabindex(-1);
+    }
+}
+
+
+
+function dragStart(event) {
+    event.dataTransfer.setData('text/plain', event.target.id);
+    setTimeout(() => event.target.style.visibility = "hidden", 0);
+
+    // Reset any existing highlights
+    resetSelectionAndHighlight();
+    
+    // Highlight targets and other dropped draggables
+    highlightTargetsForDraggable(event.target);
+    highlightOthersInDragLocation(event.target); 
+
+}
+
+
+
+
+function highlightTargetsForDraggable(draggableElement) {
+    const dragDropSet = draggableElement.closest('.drag-drop-set');
+    if (dragDropSet) {
+        // Highlight only targets within the same set
+        const targets = dragDropSet.querySelectorAll('.target');
+        targets.forEach(target => {
+            target.classList.add('target-highlighted');
+        });
+
+        // Check if the draggable is within a "drag-location"
+        if (draggableElement.closest('.drag-location')) {
+            // If so, highlight the drop zone within the same drag-drop-set
+            const dropZone = dragDropSet.querySelector('.css-8znkpr'); // Adjust the selector as needed
+            if (dropZone) {
+                dropZone.classList.add('target-highlighted');
+            }
+        }
+    }
+}
+
+
+function highlightOthersInDragLocation(selectedDraggable) {
+    // Step 1: Find the closest `.drag-drop-set` ancestor.
+    const dragDropSet = selectedDraggable.closest('.drag-drop-set');
+    if (!dragDropSet) return; // If there's no `.drag-drop-set` parent, exit the function.
+
+    // Step 2: Query all `.drag-location` divs within this ancestor.
+    const dragLocations = dragDropSet.querySelectorAll('.drag-location');
+
+    // Step 3: Iterate through each `.drag-location` to find and highlight all other draggables.
+    dragLocations.forEach(dragLocation => {
+        const otherDraggables = dragLocation.querySelectorAll('[data-component="Draggable"]');
+        otherDraggables.forEach(draggable => {
+            if (draggable !== selectedDraggable) { // Exclude the current draggable
+                draggable.classList.add('draggable-highlighted');
+            }
+        });
     });
 }
+
+
+
+
+
+
+
+function dragEnd(event) {
+    event.target.style.visibility = "visible";
+    // Reset the highlighted state only after dragging ends
+    resetSelectionAndHighlight();
+}
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const dropZones = document.querySelectorAll('[data-component="DropZone"]');
+
+    dropZones.forEach(dropZone => {
+        // Add 'dragover' event to ensure 'preventDefault' is called to allow drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Necessary to allow the drop
+            // Optionally, you can add conditions here similar to 'dragenter' if needed
+        });
+
+        dropZone.addEventListener('dragenter', (e) => {
+            // Check if the dropZone has the 'target-highlighted' class
+            if(dropZone.classList.contains('target-highlighted')) {
+                // Only add 'target-dragged-over' if 'target-highlighted' is present
+                dropZone.classList.add('target-dragged-over');
+            }
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            // Always remove 'target-dragged-over' on drag leave, as it's no longer being dragged over
+            dropZone.classList.remove('target-dragged-over');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault(); // Prevent default to handle the drop with JavaScript
+            console.log('Item dropped');
+            // Remove visual feedback regardless of condition
+            dropZone.classList.remove('target-dragged-over');
+            // Here you might want to handle the drop based on additional conditions
+        });
+    });
+});
+
+
+
+function dragOver(event) {
+    event.preventDefault();
+    // Attempt to find the closest DropZone or highlighted target from the event target
+    let target = event.target.closest('.target-highlighted, .css-8znkpr');
+    if (!target) { // If no such element is found, try to use currentTarget as a fallback
+        target = event.currentTarget.closest('.target-highlighted, .css-8znkpr');
+    }
+    if (target && target.classList.contains('target-highlighted')) {
+        target.classList.add('target-dragged-over');
+    }
+}
+
+
+function dragLeave(event) {
+    // Similar direct check as in dragOver
+    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted');
+    if (target) {
+        target.classList.remove('target-dragged-over');
+    }
+}
+
+function drop(event) {
+    event.preventDefault();
+    // Apply the same checking logic for the drop event
+    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted');
+    if (target) {
+        target.classList.remove('target-dragged-over');
+        // Here, you might want to execute additional logic for handling the drop action
+    }
+}
+
+
+
+
 
 
 
@@ -259,8 +385,20 @@ function resetSelectionAndHighlight() {
         target.classList.remove('target-highlighted', 'target-dragged-over');
     });
 
+    // Remove highlight from specific dropzone-2
+    const specificDropZone = document.getElementById('source-tray-2');
+    if (specificDropZone) {
+        specificDropZone.classList.remove('target-highlighted');
+    }
+
+    // Addition: Resetting/removing draggable-highlighted class from elements
+    document.querySelectorAll('.draggable-highlighted').forEach(el => {
+        el.classList.remove('draggable-highlighted');
+    });
+
     updateTargetsTabindex(-1); // Reset tabindex of targets
 }
+
 
 
 
