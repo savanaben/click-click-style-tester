@@ -180,26 +180,6 @@ function replaceDraggablesWithSVG(svgContent, scaleUp) {
     }
 }
 
-function toggleSVGSelection(event) {
-    event.stopPropagation();
-    const parentDiv = event.currentTarget;
-
-    const isSelected = parentDiv.classList.contains('SVG-default-style-selected');
-    resetSelectionAndHighlight();
-
-    if (!isSelected) {
-        parentDiv.classList.add('SVG-default-style-selected');
-        parentDiv.dataset.selected = "true";
-    } else {
-        parentDiv.classList.remove('SVG-default-style-selected');
-        parentDiv.dataset.selected = "false";
-    }
-}
-
-
-
-
-
 
 
 
@@ -231,16 +211,58 @@ function toggleDraggableSelection(event) {
 
 function dragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.id);
+
+    // Calculate the offset between the cursor and the top-left corner of the draggable element
+    var rect = event.target.getBoundingClientRect();
+    var offsetX = event.clientX - rect.left;
+    var offsetY = event.clientY - rect.top;
+
+    // Create a transparent image to use as the drag image
+    var transparentImage = new Image();
+    transparentImage.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    event.dataTransfer.setDragImage(transparentImage, 0, 0);
+
+    // Create a clone of the draggable element
+    var dragImage = event.target.cloneNode(true);
+    if (event.target.closest('.SVG-default-style')) {
+        dragImage.id = "customSVGDragImage"; // Different ID for SVG draggables
+        dragImage.classList.add('SVG-default-style-selected'); // Add the selected class for SVG
+    } else {
+        dragImage.id = "customDragImage";
+        dragImage.classList.add('css-grb9ji-selected'); // Add the selected class for standard draggables
+    }
+    dragImage.style.position = "absolute";
+    dragImage.style.zIndex = "10000"; // Ensure it appears on top
+    dragImage.style.pointerEvents = "none"; // Prevent the custom drag image from capturing mouse events
+    document.body.appendChild(dragImage);
+
+    // Position the custom drag image relative to the cursor using the offset
+    dragImage.style.top = (event.clientY + window.scrollY - offsetY) + "px";
+    dragImage.style.left = (event.clientX + window.scrollX - offsetX) + "px";
+
+    // Move the custom drag image with the cursor
+    document.addEventListener('dragover', function(e) {
+        dragImage.style.top = (e.clientY + window.scrollY - offsetY) + "px";
+        dragImage.style.left = (e.clientX + window.scrollX - offsetX) + "px";
+    });
+
+    // Hide the original element during the drag
     setTimeout(() => event.target.style.visibility = "hidden", 0);
 
     // Reset any existing highlights
     resetSelectionAndHighlight();
-    
+
     // Highlight targets and other dropped draggables
     highlightTargetsForDraggable(event.target);
-    highlightOthersInDragLocation(event.target); 
-
+    highlightOthersInDragLocation(event.target);
 }
+
+
+
+
+
+
+
 
 
 
@@ -293,9 +315,23 @@ function highlightOthersInDragLocation(selectedDraggable) {
 
 function dragEnd(event) {
     event.target.style.visibility = "visible";
+
+    // Remove the custom drag image for standard draggables
+    var customDragImage = document.getElementById("customDragImage");
+    if (customDragImage) {
+        document.body.removeChild(customDragImage);
+    }
+
+    // Remove the custom drag image for SVG draggables
+    var customSVGDragImage = document.getElementById("customSVGDragImage");
+    if (customSVGDragImage) {
+        document.body.removeChild(customSVGDragImage);
+    }
+
     // Reset the highlighted state only after dragging ends
     resetSelectionAndHighlight();
 }
+
 
 
 
