@@ -244,6 +244,14 @@ outline-color:#00458A;
     background-color: #658db5;
 }
 
+.draggable-highlighted-hover {
+    outline: solid;
+    outline-color: #006ad3;
+    outline-width: 6px;
+    outline-offset: 2px;
+    background-color: #658db5;
+}
+
 .target-dragged-over {
     outline: solid;
     background-color: #b0d9ff;

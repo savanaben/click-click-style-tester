@@ -370,36 +370,74 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const draggables = document.querySelectorAll('[data-component="Draggable"]');
+
+    draggables.forEach(draggable => {
+        // Add 'dragover' event to highlight draggable elements when they are dragged over
+        draggable.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Necessary to allow the drop
+            if (draggable.classList.contains('draggable-highlighted')) {
+                draggable.classList.add('draggable-highlighted-hover');
+            }
+        });
+
+        // Add 'dragleave' event to remove the highlight when the drag leaves the element
+        draggable.addEventListener('dragleave', (e) => {
+            draggable.classList.remove('draggable-highlighted-hover');
+        });
+
+        // Add 'drop' event to handle the drop action
+        draggable.addEventListener('drop', (e) => {
+            e.preventDefault(); // Prevent default to handle the drop with JavaScript
+            draggable.classList.remove('draggable-highlighted-hover');
+            // Here you might want to handle the drop based on additional conditions
+        });
+    });
+});
+
+
+
+
+
+
 function dragOver(event) {
     event.preventDefault();
-    // Attempt to find the closest DropZone or highlighted target from the event target
-    let target = event.target.closest('.target-highlighted, .css-8znkpr');
+    // Attempt to find the closest DropZone, highlighted target, or highlighted draggable from the event target
+    let target = event.target.closest('.target-highlighted, .css-8znkpr, .draggable-highlighted');
     if (!target) { // If no such element is found, try to use currentTarget as a fallback
-        target = event.currentTarget.closest('.target-highlighted, .css-8znkpr');
+        target = event.currentTarget.closest('.target-highlighted, .css-8znkpr, .draggable-highlighted');
     }
-    if (target && target.classList.contains('target-highlighted')) {
-        target.classList.add('target-dragged-over');
+    if (target) {
+        if (target.classList.contains('target-highlighted')) {
+            target.classList.add('target-dragged-over');
+        } else if (target.classList.contains('draggable-highlighted')) {
+            target.classList.add('draggable-highlighted-hover');
+        }
     }
 }
 
 
 function dragLeave(event) {
     // Similar direct check as in dragOver
-    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted');
+    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted, .draggable-highlighted-hover');
     if (target) {
-        target.classList.remove('target-dragged-over');
+        target.classList.remove('target-dragged-over', 'draggable-highlighted-hover');
     }
 }
 
 function drop(event) {
     event.preventDefault();
     // Apply the same checking logic for the drop event
-    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted');
+    const target = event.target.closest('.target-highlighted, .css-8znkpr.target-highlighted, .draggable-highlighted-hover');
     if (target) {
-        target.classList.remove('target-dragged-over');
+        target.classList.remove('target-dragged-over', 'draggable-highlighted-hover');
         // Here, you might want to execute additional logic for handling the drop action
     }
 }
+
+
 
 
 
