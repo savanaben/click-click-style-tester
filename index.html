@@ -15,7 +15,6 @@
 <div class="main-container">
 
 <!--
-
 <p>Note - BG leaning away from allowing tab movement in addition to focus group on targets. Allowing tab movement as well means you either have to </p>
     <ul>
         <li>deselect a source when you tab out of the match group (potential for deselecting pre-maturely if you accidentally tab 1 stop past the targets), or</li>
@@ -32,6 +31,13 @@
 -->
 
 <h2>Click Click Prototype</h2>
+
+<p>Prototype notes/limitations</p>
+<ul>
+    <li>The "drop" part of "drag and drop" does not work in this prototype. Clicking a location to place a source does not work.</li>
+    <li>Keyboard navigation is more complete on the blue tile/default version. It does not currently work for svgs added to the page.</li>
+</ul>
+
         <div id="svg-drop-zone-1x" class="svg-drop-zone">
             Drag and drop SVG here to test (1x Size)
         </div>
@@ -79,7 +85,7 @@
 
 
     <div class="drag-drop-set">
-        <div data-component="DropZone" id="source-tray-2" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
+        <div data-component="DropZone" id="source-tray-2" tabindex="-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
             <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-4" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
                 Choice A
             </button>

@@ -19,12 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // Global focusin event listener
-    document.addEventListener('focusin', function(event) {
-        if (!event.target.closest('[data-component="Draggable"], .target')) {
+// Global focusin event listener
+document.addEventListener('focusin', function(event) {
+    const currentSet = event.target.closest('.drag-drop-set');
+    if (currentSet) {
+        const focusableElements = currentSet.querySelectorAll('.target-highlighted, .draggable-highlighted, [data-component="Draggable"][data-selected="true"]');
+        if (!Array.from(focusableElements).includes(event.target)) {
             resetSelectionAndHighlight();
         }
-    });
+    } else {
+        resetSelectionAndHighlight();
+    }
+});
+
+
 
     setupKeyboardNavigation();
 
@@ -77,6 +85,42 @@ function setupKeyboardNavigation() {
     });
 }
 
+
+
+
+function handleArrowNavigation(event) {
+    const activeElement = document.activeElement;
+    // Find the closest .drag-drop-set container to the currently focused element
+    const currentSet = activeElement.closest('.drag-drop-set');
+    if (!currentSet) return; // Exit if no parent container matches
+
+    // Selecting elements within the current .drag-drop-set container that are highlighted or the active element itself
+    // Include DropZone with 'target-highlighted' class in the navigation
+    const elements = Array.from(currentSet.querySelectorAll('.target-highlighted, .draggable-highlighted, [data-component="Draggable"][data-selected="true"], [data-component="DropZone"].target-highlighted'));
+    const focusedIndex = elements.indexOf(activeElement);
+
+    let nextIndex = focusedIndex; // Default to the current index if no navigation key is pressed
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        // Move focus to the previous item or wrap around to the last item
+        nextIndex = focusedIndex - 1 < 0 ? elements.length - 1 : focusedIndex - 1;
+    } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        // Move focus to the next item or wrap around to the first item
+        nextIndex = (focusedIndex + 1) % elements.length;
+    }
+
+    // Safely attempt to focus the next element in the sequence
+    if (elements[nextIndex]) {
+        event.preventDefault(); // Prevent default arrow key behavior (scrolling)
+        elements[nextIndex].focus();
+    }
+}
+
+
+
+
+
+/*
+
 function handleArrowNavigation(event) {
     const activeElement = document.activeElement;
     // Find the closest .drag-drop-set container to the currently focused element
@@ -103,7 +147,7 @@ function handleArrowNavigation(event) {
     }
 }
 
-
+*/
 
 
 
@@ -201,11 +245,25 @@ function toggleDraggableSelection(event) {
         highlightOthersInDragLocation(target);
         target.focus();
         updateTargetsTabindex(0, target);
+
+        // Update tabindex for the DropZone if it's highlighted
+        const dropZone = target.closest('.drag-drop-set').querySelector('[data-component="DropZone"]');
+        if (dropZone && dropZone.classList.contains('target-highlighted')) {
+            dropZone.tabIndex = 0;
+        }
     } else {
         target.dataset.selected = "false";
         updateTargetsTabindex(-1);
+
+        // Reset tabindex for the DropZone
+        const dropZone = target.closest('.drag-drop-set').querySelector('[data-component="DropZone"]');
+        if (dropZone) {
+            dropZone.tabIndex = -1;
+        }
     }
 }
+
+
 
 
 
@@ -455,14 +513,16 @@ function resetSelectionAndHighlight() {
         el.classList.remove('css-grb9ji-selected', 'SVG-default-style-selected');
     });
 
-    document.querySelectorAll('.target').forEach(target => {
+    document.querySelectorAll('.target, [data-component="DropZone"]').forEach(target => {
         target.classList.remove('target-highlighted', 'target-dragged-over');
+        target.tabIndex = -1; // Reset tabindex
     });
 
     // Remove highlight from specific dropzone-2
     const specificDropZone = document.getElementById('source-tray-2');
     if (specificDropZone) {
         specificDropZone.classList.remove('target-highlighted');
+        specificDropZone.tabIndex = -1; // Reset tabindex
     }
 
     // Addition: Resetting/removing draggable-highlighted class from elements

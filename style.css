@@ -261,7 +261,8 @@ outline-color:#00458A;
 }
 
 
-.target:focus-visible::after {
+.target:focus-visible::after,
+[data-component="DropZone"].target-highlighted:focus-visible::after {
     content: '';
     position: absolute;
     left: -7px;   /* Adjust these values */
@@ -275,6 +276,35 @@ outline-color:#00458A;
     outline-offset: -4px;
 }
 
+.draggable-highlighted:focus-visible,
+.draggable-highlighted:focus-visible::after {
+    /* Focus-visible styles */
+    content: '';
+    /* position: relative; */
+    /* left: -12px; */
+    /* top: -12px; */
+    /* right: -12px; */
+    border: none;
+    /* bottom: -12px; */
+    /* border: 2px solid #00458A; */
+    outline-color: white;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: -4px;
+    /* background-color: #658db5; */
+    outline-color: #00478e;
+    outline-width: 2px;
+    outline-offset: 3px;
+}
+
+.draggable-highlighted:hover,
+.draggable-highlighted:focus-visible {
+    /* Shared hover and focus styles */
+    background-color: #658db5; /* Hover background color */
+    outline-color: #006ad3; /* Hover outline color */
+    outline-width: 6px; /* Hover outline width */
+    outline-offset: 2px; /* Hover outline offset */
+}
 
 
 
