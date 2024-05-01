@@ -15,6 +15,75 @@ body, html {
     font-style: italic;
 }
 
+hr {
+    border: none;
+    height: 1px;
+    width: 95%;
+    background-color: #bababa; /* Change the color as needed */
+    margin: 0px; 
+
+}
+
+.text-column {
+max-width: 75ch;
+}
+
+
+
+
+
+.tippy-box .tippy-content .close-button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.tippy-box .tippy-content .okay-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: white;
+    color: #2478cc;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    font-weight: bold; 
+    padding: 8px 12px 8px 12px;
+}
+
+.tippy-content {
+    background-color: #811ea8;
+    border-radius: 4px;
+    padding-right: 12px;
+    padding-bottom: 52px;
+    padding-top: 12px;
+    padding-left: 12px;
+    font-size: 16px;
+}
+
+.tippy-box[data-placement^='top'] .tippy-arrow::before {
+    border-top-color: #811ea8;
+}
+
+.tippy-box[data-placement^='bottom'] .tippy-arrow::before {
+    border-bottom-color: #811ea8;
+}
+
+.tippy-box[data-placement^='left'] .tippy-arrow::before {
+    border-left-color: #811ea8;
+}
+
+.tippy-box[data-placement^='right'] .tippy-arrow::before {
+    border-right-color: #811ea8;
+}
+
+
+
 .main-container {
     display: flex;
 
@@ -27,12 +96,67 @@ body, html {
 /* Existing styles */
 
 p {
-    margin: 0px;
+  
 }
 
 
 ul {
     margin:0px
+}
+
+
+
+.styleSetsButtons {
+    display: flex;            /* Align children (buttons) in a flex row */
+    flex-wrap: wrap;          /* Allow items to wrap to the next line */
+    gap: 12px;                /* Space between buttons */
+    padding: 10px;            /* Padding around the container */
+    justify-content: center;  /* Center the buttons horizontally */
+    align-items: center;      /* Align items vertically in the middle */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and label text vertically */
+    gap: 6px; /* Space between the checkbox and the label text */
+}
+
+.styleSetsButtons button {
+    padding: 6px 8px;        /* Padding inside each button */
+    cursor: pointer;          /* Cursor indicates clickable items */
+    border: 1px solid #ccc;   /* Border around the buttons */
+    background-color: #f7f7f7;/* Light grey background for the buttons */
+    border-radius: 5px;       /* Rounded corners for the buttons */
+    transition: background-color 0.1s; /* Smooth transition for hover effect */
+}
+
+.styleSetsButtons button:hover {
+    background-color: #e0e0e0; /* Slightly darker background on hover */
+}
+
+.styleSetsButtons button.active {
+    background-color: #4e4e4e; /* Change the background to a darker color */
+    color: white;             /* Change text color to white */
+    border-color: #4e4e4e;    /* Matching border color */
+}
+
+/* Target the checkbox by its id or class */
+#fadingToggle {
+    /* Scale the checkbox size; 1.5 times the original size */
+    transform: scale(1.5);
+    /* Optional: provide margin to avoid layout compression */
+    margin: 0px;
+    margin-right: 4px;
+}
+
+/* Target the checkbox by its id or class */
+#borderWeightToggle {
+    /* Scale the checkbox size; 1.5 times the original size */
+    transform: scale(1.5);
+    /* Optional: provide margin to avoid layout compression */
+    margin: 0px;
+    margin-right: 4px;
+
 }
 
 
@@ -53,6 +177,24 @@ ul {
 }
 
 
+
+#customDragImage-set2 {
+    outline-style: solid;
+    outline-width: 3px;
+   
+   /*
+    background-color: #2895FB;
+    outline-color: #00458A;
+   */
+   
+   background-color: #B35F00;
+   outline-color: #471F00;
+
+    z-index: 10000;
+    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+}
+
+
 #customSVGDragImage {
     outline-style: solid;
     outline-width: 3px;
@@ -66,7 +208,7 @@ ul {
 
 
 
-.css-8znkpr {
+.sourceTray {
     align-content: flex-start;
     align-items: center;
     background-color: rgb(235, 235, 235);
@@ -92,11 +234,42 @@ ul {
     z-index: 200;
 }
 
-.css-grb9ji {
+.draggable {
     
     /*
     background-color: rgb(36, 120, 204);
     */
+    position: relative;
+    background-color: #085EB4;
+    box-sizing: border-box;
+    margin: 8px;
+    color: rgb(255, 255, 255);
+    cursor: pointer; /* Updated cursor style */
+    display: flex;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26.4px;
+border-style:none;
+    padding: 16px 32px;
+    text-align: start;
+    text-decoration-skip-ink: none;
+    text-rendering: optimizelegibility;
+    user-select: none;
+    outline: none; /* Removes default browser focus outline */
+}
+
+.draggable:hover {
+    background-color: #0F75DB;
+}
+
+
+.draggable-set2 {
+    
+    /*
+    background-color: rgb(36, 120, 204);
+    */
+    position: relative;
     background-color: #085EB4;
     box-sizing: border-box;
     margin: 8px;
@@ -118,7 +291,21 @@ border-style:none;
 
 
 
-.css-grb9ji-selected {
+
+.draggable-set2:hover {
+    background-color: #0F75DB;
+}
+
+
+.draggable-faded {
+    background-color: #677789;
+}
+
+
+
+
+
+.draggable-selected {
     outline-style: solid;
     outline-width: 3px;
    
@@ -135,8 +322,30 @@ border-style:none;
 }
 
 
+.draggable-selected-set2 {
+    outline-style: solid;
+    outline-width: 3px;
+    background-color: #B35F00;
+    outline-color: #471F00;
+    z-index: 10000;
+    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+}
 
-.css-grb9ji:focus-visible::after {
+.draggable-selected-set3 {
+    outline-style: solid;
+    outline-width: 3px;
+   background-color: #0F75DB;
+   outline-color: #002D57;
+    z-index: 10000;
+    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+}
+
+.draggable-selected-set2:hover {
+    background-color: #B35F00;
+}
+
+
+.draggable:focus-visible::after {
     content: '';
     position: absolute;
     left: -7px;   /* Adjust these values */
@@ -148,15 +357,6 @@ border-style:none;
     outline-width: 2px;
     outline-style: solid;
     outline-offset: -4px;
-}
-
-.css-grb9ji {
-    position: relative; /* Needed for absolute positioning of ::after */
-    /* Rest of your styles */
-}
-
-.css-grb9ji:hover {
-    background-color: #0F75DB;
 }
 
 
@@ -211,6 +411,35 @@ border-style:none;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.08);
 }
 
+.target-set3 {
+    border: 1px dashed #353535;
+    background-color: white;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px; /* Same padding as draggable buttons */
+    box-sizing: border-box;
+    font-family: Calibri, system-ui, sans-serif;
+    font-size: 24px;
+    line-height: 26.4px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.border-weight-reduced {
+    border: 1px dashed #353535 !important; /* Example to reduce border width, override other styles with !important if needed */
+    outline-width: 2px !important;
+    outline-offset: -2px !important;
+    box-shadow: none !important;
+}
+
+.border-weight-reduced:hover {
+    outline-width: 4px !important;
+    outline-offset: -4px !important;
+}
+
+
 .target-highlighted {
 outline: solid;
 background-color: #d1e9ff;
@@ -219,12 +448,54 @@ outline-offset: -4px;
 outline-color:#00458A;
 }
 
+
+.targetHighlight-weight-reduced {
+    outline-width: 4px !important;
+    outline-offset: -4px !important;
+}
+
+
+
+.target-highlighted-set2 {
+    outline: solid;
+    background-color: #ffe1bf;
+    outline-width: 4px;
+    outline-offset: -4px;
+    outline-color:#954f00;
+    }
+
+    .target-highlighted-set3 {
+        outline: solid;
+        background-color: #d1e9ff;
+        outline-width: 2px;
+        outline-offset: -2px;
+        outline-color:#00458A;
+        }
+
 .target-highlighted:hover {
     outline: solid;
     background-color: #b0d9ff;
     cursor: pointer;
     outline-width: 6px;
     outline-offset: -6px;
+    outline-color:#0066cd;
+}
+
+.target-highlighted-set2:hover {
+    outline: solid;
+    background-color: #ffe1bf;
+    cursor: pointer;
+    outline-width: 6px;
+    outline-offset: -6px;
+    outline-color:#ce6e00;
+}
+
+
+.target-highlighted-set3:hover {
+
+    cursor: pointer;
+    outline-width: 4px;
+    outline-offset: -4px;
     outline-color:#0066cd;
 }
 
@@ -236,12 +507,48 @@ outline-color:#00458A;
     box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
 }
 
+
+.draggable-highlighted-thin-border  {
+    outline: solid;
+    outline-color: #00458A;
+    outline-width: 2px !important;
+    outline-offset: 2px;
+    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+}
+
+.draggable-highlighted-thin-border:hover  {
+    outline: solid;
+    outline-color: #00458A;
+    outline-width: 4px !important;
+    outline-offset: 2px;
+    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+}
+
+
+.draggable-highlighted-set2 {
+    outline: solid;
+    outline-color: #954f00;
+    outline-width: 4px;
+    outline-offset: 2px;
+    box-shadow: 0px 0px 0px 3px rgb(255 225 191);
+}
+
 .draggable-highlighted:hover {
     outline: solid;
     outline-color: #006ad3;
     outline-width: 6px;
     outline-offset: 2px;
-    background-color: #658db5;
+    background-color: #677789;
+}
+
+
+.draggable-highlighted-set2:hover {
+    outline: solid;
+    outline-color: #ce6e00;
+    outline-width: 6px;
+    outline-offset: 2px;
+    background-color: #677789;
+    box-shadow: 0px 0px 0px 3px rgba(255, 225, 191, 1);
 }
 
 .draggable-highlighted-hover {
@@ -252,11 +559,35 @@ outline-color:#00458A;
     background-color: #658db5;
 }
 
+.draggable-highlighted-hover-set2 {
+    outline: solid;
+    outline-color: #8a007a;
+    outline-width: 6px;
+    outline-offset: 2px;
+    background-color: #fad1ff;
+}
+
+
 .target-dragged-over {
     outline: solid;
     background-color: #b0d9ff;
     outline-width: 6px;
     outline-offset: -6px;
+    outline-color:#0066cd;
+}
+
+.target-dragged-over-set2 {
+    outline: solid;
+    background-color: #ffe1bf;
+    outline-width: 6px;
+    outline-offset: -6px;
+    outline-color:#ce6e00;
+}
+
+.target-dragged-over-set3 {
+    cursor: pointer;
+    outline-width: 4px;
+    outline-offset: -4px;
     outline-color:#0066cd;
 }
 
@@ -297,17 +628,15 @@ outline-color:#00458A;
     outline-offset: 3px;
 }
 
+
 .draggable-highlighted:hover,
 .draggable-highlighted:focus-visible {
     /* Shared hover and focus styles */
-    background-color: #658db5; /* Hover background color */
+    background-color: #677789; /* Hover background color */
     outline-color: #006ad3; /* Hover outline color */
     outline-width: 6px; /* Hover outline width */
     outline-offset: 2px; /* Hover outline offset */
 }
-
-
-
 
 
 

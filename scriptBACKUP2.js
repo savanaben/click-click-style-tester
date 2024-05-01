@@ -168,3 +168,5 @@ document.addEventListener('click', function(event) {
         resetSelectionAndHighlight();
     }
 });
+
+

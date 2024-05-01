@@ -6,6 +6,7 @@
     <title>Drag and Drop Component</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
@@ -32,43 +33,68 @@
 
 <h2>Click Click Prototype</h2>
 
+<div class="text-column">
 <p>Prototype notes/limitations</p>
 <ul>
+    <li>This is a live prototype for experimentation. Features and interface visuals are for testing and feedback.</li>
     <li>The "drop" part of "drag and drop" does not work in this prototype. Clicking a location to place a source does not work.</li>
     <li>Keyboard navigation is more complete on the blue tile/default version. It does not currently work for svgs added to the page.</li>
 </ul>
-
+</div>
         <div id="svg-drop-zone-1x" class="svg-drop-zone">
             Drag and drop SVG here to test (1x Size)
         </div>
         <div id="svg-drop-zone-2x" class="svg-drop-zone">
             Drag and drop SVG here to test (2x Size)
         </div>
-       
-       
-       
-       
+        
         <button type="button" class="button-default">Focusable element</button>
         
+
+
+   
+
+       <div class="styleSetsButtons">
+        <button onclick="switchStyleSet('', this)">All blue</button>
+        <button onclick="switchStyleSet('set2', this)">Brown on select/drag</button>
+        <!-- <button onclick="switchStyleSet('set3', this)">Reduce target border weight (requires art refactor)</button>         -->
+        <label class="checkbox-container">
+            Fade unselected options:
+            <input type="checkbox" id="fadingToggle" name="fadingToggle" onchange="toggleFadingFeature(this.checked)">
+        </label>
+        <label class="checkbox-container">
+            Reduce target border weight:
+            <input type="checkbox" id="borderWeightToggle" name="borderWeightToggle" onchange="toggleBorderWeightFeature(this.checked)">
+        </label>
         
-        
+    </div>
+    
+    <hr>
+
+
+    <div class="text-column">
+       <p>Put the store names in order from the store with the greatest price for a pair of shoes to the store with the least price for a pair of shoes.</p>
+       <p><s>Drag</s> Move a store name into each box to show your answer.</p>
+    
+    </div>
+    
     <div class="drag-drop-set">
-        <div data-component="DropZone" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-1" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
-                Choice A
+        <div data-component="DropZone" id="source-tray-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="sourceTray">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-1" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable" data-selected="false">
+                Store 1
             </button>
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-2" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
-                Choice B
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-2" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
+                Store 2
             </button>
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-3" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
-                Choice C
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-3" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
+                Store 3
             </button>
         </div>
         
         <div class="drag-location" role="radiogroup">
-            <div class="target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
-            <div class="target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
-            <div class="target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice C</span></div>
+            <div class="target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 1</span></div>
+            <div class="target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 2</span></div>
+            <div class="target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 3</span></div>
         </div>
     </div>
 
@@ -78,24 +104,22 @@
         <br> 
         <br> 
         <br> 
-        <br> 
-        <br> 
 
         <button type="button" class="button-default">Focusable element</button>
 
 
     <div class="drag-drop-set">
-        <div data-component="DropZone" id="source-tray-2" tabindex="-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="css-8znkpr">
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-4" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji" data-selected="false">
+        <div data-component="DropZone" id="source-tray-2" tabindex="-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="sourceTray">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-4" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable" data-selected="false">
                 Choice A
             </button>
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-5" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-5" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice B
             </button>
-            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice B
             </button>
-            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+            <button style="visibility: hidden;" draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-7" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice B
             </button>
         </div>
@@ -103,10 +127,10 @@
         <div class="drag-location" role="radiogroup">
             <div class="target" id="target4" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
             <div class="target" id="target5" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice C
             </button>
-            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="css-grb9ji">
+            <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice D
             </button>
         </div>
@@ -120,5 +144,8 @@
 </div>
 
 <script src="script.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
 </body>
 </html>
