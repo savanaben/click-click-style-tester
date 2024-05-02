@@ -401,7 +401,11 @@ function dragStart(event) {
     } else {
         if (classConfig.draggableSelected === "draggable-selected-set2") {
             dragImage.id = "customDragImage-set2";
-        } else {
+        } 
+        if (classConfig.draggableSelected === "draggable-selected-set3") {
+            dragImage.id = "customDragImage-set3";
+        } 
+        else {
             dragImage.id = "customDragImage";
         }
     }
@@ -459,6 +463,12 @@ function dragEnd(event) {
         if (customDragImageSet2) {
             document.body.removeChild(customDragImageSet2);
         }
+
+                // Check and remove the custom drag image with set2 ID if present
+                var customDragImageSet3 = document.getElementById("customDragImage-set3");
+                if (customDragImageSet3) {
+                    document.body.removeChild(customDragImageSet3);
+                }
 
     // Remove the custom drag image for SVG draggables
     var customSVGDragImage = document.getElementById("customSVGDragImage");

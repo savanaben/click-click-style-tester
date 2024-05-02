@@ -202,6 +202,13 @@ ul {
 }
 
 
+#customDragImage-set3 {
+    background-color: #0F75DB;
+    transform: translate(-3px, -3px);
+     z-index: 10000;
+     box-shadow: 1px 1px 0px 0px #002D57, 2px 2px 0px 0px #002D57, 3px 3px 0px 0px #002D57, 4px 4px 0px 0px #002D57;
+}
+
 #customSVGDragImage {
     outline-style: solid;
     outline-width: 3px;
@@ -323,7 +330,6 @@ border-style:none;
    
    background-color: #0F75DB;
    outline-color: #002D57;
-
     z-index: 10000;
     box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
 }
@@ -339,12 +345,11 @@ border-style:none;
 }
 
 .draggable-selected-set3 {
-    outline-style: solid;
-    outline-width: 3px;
+
    background-color: #0F75DB;
-   outline-color: #002D57;
+   transform: translate(-4px, -4px);
     z-index: 10000;
-    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+    box-shadow: 1px 1px 0px 0px #002D57, 2px 2px 0px 0px #002D57, 3px 3px 0px 0px #002D57, 4px 4px 0px 0px #002D57;
 }
 
 .draggable-selected-set2:hover {
@@ -418,21 +423,7 @@ border-style:none;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.08);
 }
 
-.target-set3 {
-    border: 1px dashed #353535;
-    background-color: white;
-    margin: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 32px; /* Same padding as draggable buttons */
-    box-sizing: border-box;
-    font-family: Calibri, system-ui, sans-serif;
-    font-size: 24px;
-    line-height: 26.4px;
-    font-weight: 700;
-    box-shadow: none;
-}
+
 
 .border-weight-reduced {
     border: 1px dashed #353535 !important; /* Example to reduce border width, override other styles with !important if needed */
@@ -472,12 +463,35 @@ outline-color:#00458A;
     }
 
     .target-highlighted-set3 {
-        outline: solid;
+        outline: none;
         background-color: #d1e9ff;
         outline-width: 2px;
         outline-offset: -2px;
         outline-color:#00458A;
+        position: relative;
+        /* box-shadow: inset 4px 0px 0px 0px #2769a7, inset 0px 4px 0px 0px #5c96cc; */
         }
+
+        .target-highlighted-set3:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: solid;
+            border-top-style: inset;
+            border-top-color: #3da2ff;
+            border-left-style: inset;
+            border-left-color: #9acfff;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            box-sizing: border-box;
+            border-right-width: 2px;
+            border-right-color: #3f6386;
+            border-bottom-color: #4b84b9;
+            border-top-width: 5px;
+            border-bottom-width: 2px;
+            border-left-width: 5px;
+            }
 
 .target-highlighted:hover {
     outline: solid;
