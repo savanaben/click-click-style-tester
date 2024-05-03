@@ -449,6 +449,15 @@ pointer-events:all;
 }
 
 
+.target-highlighted:hover {
+    outline: solid;
+    background-color: #b0d9ff;
+    cursor: pointer;
+    outline-width: 6px;
+    outline-offset: -6px;
+    outline-color:#0066cd;
+}
+
 .targetHighlight-weight-reduced {
     outline-width: 4px !important;
     outline-offset: -4px !important;
@@ -522,18 +531,10 @@ pointer-events:all;
                 z-index: -1;
                 }
 
-.target-highlighted:hover {
-    outline: solid;
-    background-color: #b0d9ff;
-    cursor: pointer;
-    outline-width: 6px;
-    outline-offset: -6px;
-    outline-color:#0066cd;
-}
 
 .target-highlighted-set2:hover {
     outline: solid;
-    background-color: #ffe1bf;
+    background-color: #f5cfa4;
     cursor: pointer;
     outline-width: 6px;
     outline-offset: -6px;
@@ -629,7 +630,7 @@ pointer-events:all;
 
 .target-dragged-over-set2 {
     outline: solid;
-    background-color: #ffe1bf;
+    background-color: #f5cfa4;
     outline-width: 6px;
     outline-offset: -6px;
     outline-color:#ce6e00;
