@@ -402,7 +402,7 @@ function dragStart(event) {
         if (classConfig.draggableSelected === "draggable-selected-set2") {
             dragImage.id = "customDragImage-set2";
         } 
-        if (classConfig.draggableSelected === "draggable-selected-set3") {
+        else if (classConfig.draggableSelected === "draggable-selected-set3") {
             dragImage.id = "customDragImage-set3";
         } 
         else {
