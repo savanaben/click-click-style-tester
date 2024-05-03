@@ -484,7 +484,7 @@ pointer-events:all;
         pointer-events:all;
         /* box-shadow: inset 4px 0px 0px 0px #2769a7, inset 0px 4px 0px 0px #5c96cc; */
         }
-
+       
         .target-highlighted-set3::after {
             content: '';
             position: absolute;
@@ -492,9 +492,9 @@ pointer-events:all;
             height: 100%;
             border: solid;
             border-top-style: inset;
-            border-top-color: #3da2ff;
+            border-top-color: #2192fa;
             border-left-style: inset;
-            border-left-color: #9acfff;
+            border-left-color: #bedefc;
             border-right-style: solid;
             border-bottom-style: solid;
             box-sizing: border-box;
@@ -506,6 +506,7 @@ pointer-events:all;
             border-left-width: 5px;
             background-color: #d1e9ff;
             z-index: -1;
+            box-shadow: inset 10px 10px 10px -6px rgba(0, 0, 0, 0.12);
             }
 
             .target-highlighted-set3:hover::after {
@@ -515,20 +516,21 @@ pointer-events:all;
                 height: 100%;
                 border: solid;
                 border-top-style: inset;
-                border-top-color: #3da2ff;
+                border-top-color: #2192fa;
                 border-left-style: inset;
-                border-left-color: #9acfff;
+                border-left-color: #bedefc;
                 border-right-style: solid;
                 border-bottom-style: solid;
                 box-sizing: border-box;
                 border-right-width: 3px;
                 border-right-color: #3f6386;
                 border-bottom-color: #4b84b9;
-                border-top-width: 7px;
+                border-top-width: 8px;
                 border-bottom-width: 3px;
-                border-left-width: 7px;
+                border-left-width: 8px;
                 background-color: #d1e9ff;
                 z-index: -1;
+                box-shadow: inset 10px 10px 10px -6px rgba(0, 0, 0, 0.16);
                 }
 
 
