@@ -762,6 +762,10 @@ pointer-events:all;
     /* Rest of your styles */
 }
 
+.svg-faded {
+    filter: saturate(0.2) contrast(0.9);
+}
+
 .svg-drop-zone {
     font-size: 18px;
     font-family: sans-serif;

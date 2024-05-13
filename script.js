@@ -347,13 +347,15 @@ function toggleDraggableSelection(event) {
     const dropZone = target.closest('.drag-drop-set').querySelector('[data-component="DropZone"]');
     if (dropZone) {
         dropZone.querySelectorAll('[data-component="Draggable"]').forEach(el => {
-            // Check if the element is not the target and does not have the SVG-default-style class
-            if (el !== target && !el.classList.contains('SVG-default-style')) {
-                // Only apply the faded class if fading is enabled
+            if (el !== target) { // Check if the element is not the target
                 if (classConfig.fadingEnabled) {
-                    el.classList.add(classConfig.draggableFaded);
+                    if (el.classList.contains('SVG-default-style')) {
+                        el.classList.add('svg-faded'); // Apply svg-faded for SVG draggables
+                    } else {
+                        el.classList.add(classConfig.draggableFaded); // Apply draggable-faded for other draggables
+                    }
                 } else {
-                    el.classList.remove(classConfig.draggableFaded);
+                    el.classList.remove('svg-faded', classConfig.draggableFaded); // Remove both classes if fading is disabled
                 }
             }
         });
@@ -439,9 +441,10 @@ const dragDropSet = event.target.closest('.drag-drop-set');
 if (dragDropSet && classConfig.fadingEnabled) { // Check if fading is enabled
     const otherDraggables = dragDropSet.querySelectorAll('[data-component="Draggable"]:not([data-selected="true"])');
     otherDraggables.forEach(draggable => {
-        // Only apply the faded class to draggables that do not have the SVG-default-style class
-        if (!draggable.classList.contains('SVG-default-style')) {
-            draggable.classList.add(classConfig.draggableFaded);
+        if (draggable.classList.contains('SVG-default-style')) {
+            draggable.classList.add('svg-faded'); // Apply svg-faded for SVG draggables
+        } else {
+            draggable.classList.add(classConfig.draggableFaded); // Apply draggable-faded for other draggables
         }
     });
 }
@@ -746,8 +749,8 @@ function resetSelectionAndHighlight() {
     });
 
     // Remove the 'draggableFaded' class from all elements
-    document.querySelectorAll(`.${classConfig.draggableFaded}`).forEach(el => {
-        el.classList.remove(classConfig.draggableFaded);
+    document.querySelectorAll(`.${classConfig.draggableFaded}, .svg-faded`).forEach(el => {
+        el.classList.remove(classConfig.draggableFaded, 'svg-faded');
     });
 
         // Remove the 'draggable-highlighted-thin-border' class from all elements
