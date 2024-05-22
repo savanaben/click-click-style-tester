@@ -23,11 +23,15 @@ document.addEventListener('focusin', function(event) {
     const currentSet = event.target.closest('.drag-drop-set');
     if (currentSet) {
         const focusableElements = currentSet.querySelectorAll('.target-highlighted, .draggable-highlighted, [data-component="Draggable"][data-selected="true"]');
-        if (!Array.from(focusableElements).includes(event.target)) {
+        // Check if the focused element is not among the focusable elements and is not a draggable
+        if (!Array.from(focusableElements).includes(event.target) && !event.target.matches('[data-component="Draggable"]')) {
             resetSelectionAndHighlight();
         }
     } else {
-        resetSelectionAndHighlight();
+        // If not within a drag-drop-set, check if the focused element is not a draggable before resetting
+        if (!event.target.matches('[data-component="Draggable"]')) {
+            resetSelectionAndHighlight();
+        }
     }
 });
 
@@ -171,14 +175,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function setupKeyboardNavigation() {
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-            let selectedDraggable = document.querySelector('[data-component="Draggable"][data-selected="true"]');
-            if (selectedDraggable) {
-                handleArrowNavigation(event, selectedDraggable);
-            }
+document.addEventListener('keydown', (event) => {
+
+    // Handle Esc key to reset selections and highlights and return focus
+    if (event.key === 'Escape' || event.key === 'Esc') {  // 'Esc' for older browsers
+        // Find the element that was previously selected
+        const previouslySelected = document.querySelector('[data-component="Draggable"][data-selected="true"]');
+        resetSelectionAndHighlight();
+        if (previouslySelected) {
+            previouslySelected.focus();  // Return focus to the previously selected draggable
         }
-    });
+        return; // Early exit after handling Esc
+    }
+
+
+// Keydown event listener for handling Enter or Space key on sourceTray or target
+
+    if (event.key === 'Enter' || event.key === ' ') { // Check for Enter or Space key
+        const target = event.target;
+        if (target.classList.contains('sourceTray') || target.classList.contains('target')) {
+            resetSelectionAndHighlight();
+        }
+    }
+
+
+    // Explicitly prevent default behavior for up and down arrow keys within specific contexts
+    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && event.target.closest('.drag-drop-set')) {
+        event.preventDefault();
+        handleArrowNavigation(event);
+        return; // Early exit after handling navigation
+    }
+
+
+ else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        handleArrowNavigation(event); // Handle only left and right arrow keys
+    }
+});
 }
 
 
@@ -196,10 +228,10 @@ function handleArrowNavigation(event) {
     const focusedIndex = elements.indexOf(activeElement);
 
     let nextIndex = focusedIndex; // Default to the current index if no navigation key is pressed
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
         // Move focus to the previous item or wrap around to the last item
         nextIndex = focusedIndex - 1 < 0 ? elements.length - 1 : focusedIndex - 1;
-    } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
         // Move focus to the next item or wrap around to the first item
         nextIndex = (focusedIndex + 1) % elements.length;
     }
@@ -728,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the popover
     popoverInstance = tippy(sourceTray, {
         content: `<h3 style="margin:0 0 0.2rem 0;"><strong>Try click and click!</strong></h3>
-                  <p style="margin:0 0 0.5rem 0;">Select or click one of the options. Then select where you want to place it.</p>
+                  <p class="stem-text" style="margin:0 0 0.5rem 0;">Select or click one of the options. Then select where you want to place it.</p>
                   <div class="video-container" style="position: relative; width: 100%; max-width: 270px; margin: auto;">
                       <video id="customVideoPlayer" style="width: 100%; display: block; border-radius:4px; margin-bottom:4px;">
                           <source src="Comp 1-1.mp4" type="video/mp4">
@@ -746,7 +778,7 @@ document.addEventListener('DOMContentLoaded', () => {
         allowHTML: true,
         interactive: true,
         trigger: 'manual',
-        maxWidth: '380px',
+        maxWidth: '410px',
         hideOnClick: false
     });
 });

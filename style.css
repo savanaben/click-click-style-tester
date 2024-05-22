@@ -8,6 +8,10 @@ body, html {
     font-size: 18px;
 }
 
+h3 {
+    font-size: 26px;
+}
+
 .button-default {
     background-color: white;
     border-color: white;
@@ -61,7 +65,7 @@ max-width: 75ch;
     color: #2478cc;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 24px;
     border-radius: 4px;
     font-weight: bold; 
     padding: 8px 12px 8px 12px;
@@ -71,7 +75,7 @@ max-width: 75ch;
     background-color: #811ea8;
     border-radius: 4px;
     padding-right: 12px;
-    padding-bottom: 52px;
+    padding-bottom: 64px;
     padding-top: 12px;
     padding-left: 12px;
     font-size: 16px;
@@ -135,7 +139,7 @@ ul {
 .styleSetsButtons button {
     padding: 6px 8px;        /* Padding inside each button */
     cursor: pointer;          /* Cursor indicates clickable items */
-    border: 1px solid #ccc;   /* Border around the buttons */
+    border: 1px solid #949494;   /* Border around the buttons */
     background-color: #f7f7f7;/* Light grey background for the buttons */
     border-radius: 5px;       /* Rounded corners for the buttons */
     transition: background-color 0.1s; /* Smooth transition for hover effect */
