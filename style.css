@@ -16,6 +16,11 @@ body, html {
     font-style: italic;
 }
 
+button:disabled {
+    pointer-events: none; /* Prevents hover and click events */
+    cursor: default; /* Changes the cursor to default to indicate non-interactivity */
+}
+
 hr {
     border: none;
     height: 1px;
@@ -427,7 +432,7 @@ border-style:none;
 
 
 .border-weight-reduced {
-    border: 1px dashed #353535 !important; /* Example to reduce border width, override other styles with !important if needed */
+    border: 1px solid #353535 !important; /* Example to reduce border width, override other styles with !important if needed */
     outline-width: 2px !important;
     outline-offset: -2px !important;
     box-shadow: none !important;

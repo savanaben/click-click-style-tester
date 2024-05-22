@@ -329,7 +329,17 @@ function toggleDraggableSelection(event) {
     const isSelected = target.dataset.selected === "true";
     resetSelectionAndHighlight();
 
-    if (!isSelected) {
+    // Now check for the 'draggable-highlighted' class after other updates
+    // this is not working. it's not finding the draggable-highlighted class. I think there's an order of operations issue. 
+
+    // if (target.classList.contains('draggable-highlighted')) {
+    //     console.log("Resetting selection and highlight due to class match.");
+    //     resetSelectionAndHighlight();
+    //     return;  // Exit the function early to prevent further execution
+    // }
+
+
+      if (!isSelected) {
         // Check if the element is an SVG draggable
         if (target.classList.contains('SVG-default-style')) {
             target.classList.add('SVG-default-style-selected');
@@ -366,7 +376,22 @@ function toggleDraggableSelection(event) {
         }
     }
 
-    } else {
+        // New functionality: Disable buttons and allow click propagation. this is to disable draggables in the source location when you've clicked a draggable in a target. we need to do this to allow you to return a draggable to the source location, if repeat draggables are allowed. 
+        if (target.closest('.drag-location')) {
+            const dragDropSet = target.closest('.drag-drop-set');
+            const dropZone = dragDropSet.querySelector('[data-component="DropZone"]');
+            if (dropZone) {
+                dropZone.querySelectorAll('button').forEach(button => {
+                    button.disabled = true;
+                });
+            }
+        }
+
+    } 
+    
+
+    
+    else {
         target.dataset.selected = "false";
         updateTargetsTabindex(-1);
 
@@ -376,6 +401,8 @@ function toggleDraggableSelection(event) {
             dropZone.tabIndex = -1;
         }
     }
+
+    
 }
 
 
@@ -672,12 +699,64 @@ function dragLeave(event) {
 
 
 
+function playVideo() {
+    const video = document.getElementById('customVideoPlayer');
+    const playButton = document.querySelector('.play-button');
+
+    // Toggle play/pause and hide/show the play button
+    if (video.paused) {
+        video.play();
+        playButton.style.display = 'none'; // Hide play button when video is playing
+    } else {
+        video.pause();
+        playButton.style.display = 'flex'; // Show play button when video is paused
+    }
+
+    // Add event listener for when the video ends
+    video.addEventListener('ended', function() {
+        playButton.style.display = 'flex'; // Show play button when video ends
+    });
+}
 
 
 
+let popoverInstance = null;
 
-// Flag to track if the popover has been shown
-let popoverShown = false;
+document.addEventListener('DOMContentLoaded', () => {
+    const sourceTray = document.getElementById('source-tray-1');
+
+    // Initialize the popover
+    popoverInstance = tippy(sourceTray, {
+        content: `<h3 style="margin:0 0 0.2rem 0;"><strong>Try click and click!</strong></h3>
+                  <p style="margin:0 0 0.5rem 0;">Select or click one of the options. Then select where you want to place it.</p>
+                  <div class="video-container" style="position: relative; width: 100%; max-width: 270px; margin: auto;">
+                      <video id="customVideoPlayer" style="width: 100%; display: block; border-radius:4px; margin-bottom:4px;">
+                          <source src="Comp 1-1.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                      <button class="play-button" onclick="playVideo()" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: none; background-color: transparent; width: 100px; height: 100px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                          <div style="border-radius: 50%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                              <svg data-component="SVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="white" data-icon-name="play-circle" focusable="false" role="presentation" class="css-1ev6far" style="background-color: black;background-color: rgba(0, 0, 0, 0.85);border-radius: 500px;">
+                                  <path d="M24 2c12.147 0.009 21.991 9.858 21.991 22.006 0 9.056-5.47 16.834-13.286 20.211l-0.143 0.055c-2.502 1.072-5.414 1.696-8.472 1.696-12.154 0-22.006-9.853-22.006-22.006 0-9.027 5.435-16.784 13.211-20.178l0.142-0.055c2.514-1.093 5.442-1.728 8.519-1.728 0.015 0 0.031 0 0.046 0h-0.002zM24 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zM18 12v24l18-12z"></path>
+                              </svg>
+                          </div>
+                      </button>
+                  </div>
+                  <button class="okay-button" onclick="closePopover()">Okay</button>`,
+        allowHTML: true,
+        interactive: true,
+        trigger: 'manual',
+        maxWidth: '380px',
+        hideOnClick: false
+    });
+});
+
+function showPopover() {
+    if (popoverInstance) {
+        popoverInstance.show();
+    }
+}
+
 
 function drop(event) {
     event.preventDefault();
@@ -686,36 +765,18 @@ function drop(event) {
     if (target) {
         target.classList.remove('target-dragged-over', 'targetHighlight-weight-reduced', 'draggable-highlighted-hover');
 
-        // Check if the popover has not been shown and the target is one of the specified IDs
+        // Check if the popover has not been shown and the popover has not been shown and the target is one of the specified IDs:
         if (!popoverShown && ['target1', 'target2', 'target3'].includes(target.id)) {
-            // Find the source tray element
-            const sourceTray = document.getElementById('source-tray-1');
-
-            // Create and show the Tippy popover on the source tray
-            const popover = tippy(sourceTray, {
-                content: '<p style="margin:0 0 0.5rem 0;"><strong>Drag and drop or click and click</strong></p> You can also select or click one of these options, and then select where you want to place it.<button class="okay-button" onclick="closePopover()">Okay</button>',
-                allowHTML: true, // Allow HTML content
-                interactive: true, // Make the popover interactive
-                trigger: 'manual', // Manual triggering
-                maxWidth: '380px', // Increase the width as needed
-                hideOnClick: false // Keep the popover open when clicking outside
-            });
-
-            // Show the popover
-            popover.show();
-
-            // Set the flag to true to prevent showing the popover again
-            popoverShown = true;
+            showPopover(); // Show the popover using the previously defined function
+            popoverShown = true; // Set the flag to true to prevent showing the popover again
         }
     }
 }
 
-
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', () => {
+    const showPopoverButton = document.getElementById('showPopoverButton');
+    showPopoverButton.addEventListener('click', showPopover);
+});
 
 
 // Function to close the popover
@@ -744,7 +805,7 @@ function resetSelectionAndHighlight() {
 
     // Reset targets and drop zones
     document.querySelectorAll(`.${classConfig.targetHighlighted}, ${classConfig.targetDraggedOver}`).forEach(target => {
-        target.classList.remove(classConfig.targetHighlighted, classConfig.targetDraggedOver);
+        target.classList.remove(classConfig.targetHighlighted, classConfig.targetDraggedOver, 'target-dragged-over');
         target.tabIndex = -1; // Reset tabindex
     });
 
@@ -772,6 +833,11 @@ function resetSelectionAndHighlight() {
 
     // Reset tabindex for all targets as a catch-all
     updateTargetsTabindex(-1);
+
+        // Re-enable all draggable buttons
+        document.querySelectorAll('[data-component="DropZone"] button').forEach(button => {
+            button.disabled = false; // Enable the button
+        });
 }
 
 
