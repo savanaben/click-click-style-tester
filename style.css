@@ -235,7 +235,7 @@ ul {
     align-content: flex-start;
     align-items: center;
     background-color: rgb(235, 235, 235);
-    border: 0.8px solid rgb(199, 199, 199);
+    border: 0.8px solid rgb(199, 199, 199) !important;
     border-radius: 4px;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
@@ -435,12 +435,15 @@ border-style:none;
 
 
 
+
+
 .border-weight-reduced {
-    border: 1px solid #353535 !important; /* Example to reduce border width, override other styles with !important if needed */
-    outline-width: 2px !important;
-    outline-offset: -2px !important;
-    box-shadow: none !important;
-}
+    border: 2px solid #353535; 
+    outline-width: 3px !important;
+    outline-offset: -3px !important;
+} 
+
+
 
 .border-weight-reduced:hover {
     outline-width: 4px !important;
@@ -574,7 +577,7 @@ pointer-events:all;
 .draggable-highlighted-thin-border  {
     outline: solid;
     outline-color: #00458A;
-    outline-width: 2px !important;
+    outline-width: 3px !important;
     outline-offset: 2px;
     box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
 }
