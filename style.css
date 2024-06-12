@@ -182,11 +182,11 @@ ul {
    
    /*
     background-color: #2895FB;
-    outline-color: #00458A;
+    outline-color: #043B80;
    */
    
-   background-color: #0F75DB;
-   outline-color: #002D57;
+   background-color: #2478cc;
+   outline-color: #002357;
 
     z-index: 10000;
     box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
@@ -200,7 +200,7 @@ ul {
    
    /*
     background-color: #2895FB;
-    outline-color: #00458A;
+    outline-color: #043B80;
    */
    
    background-color: #B35F00;
@@ -212,10 +212,10 @@ ul {
 
 
 #customDragImage-set3 {
-    background-color: #0F75DB;
+    background-color: #2478cc;
     transform: translate(-3px, -3px);
      z-index: 10000;
-     box-shadow: 1px 1px 0px 0px #002D57, 2px 2px 0px 0px #002D57, 3px 3px 0px 0px #002D57, 4px 4px 0px 0px #002D57;
+     box-shadow: 1px 1px 0px 0px #002357, 2px 2px 0px 0px #002357, 3px 3px 0px 0px #002357, 4px 4px 0px 0px #002357;
 }
 
 #customSVGDragImage {
@@ -223,7 +223,7 @@ ul {
     outline-width: 3px;
     outline-offset: 2px;
     background-color: white;
-    outline-color: #002D57;
+    outline-color: #002357;
     z-index: 10000;
     box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, 0.23);
 }
@@ -263,7 +263,7 @@ ul {
     background-color: rgb(36, 120, 204);
     */
     position: relative;
-    background-color: #085EB4;
+    background-color: #1159a7;
     box-sizing: border-box;
     margin: 8px;
     color: rgb(255, 255, 255);
@@ -283,7 +283,7 @@ border-style:none;
 }
 
 .draggable:hover {
-    background-color: #0F75DB;
+    background-color: #2478cc;
 }
 
 
@@ -293,7 +293,7 @@ border-style:none;
     background-color: rgb(36, 120, 204);
     */
     position: relative;
-    background-color: #085EB4;
+    background-color: #1159a7;
     box-sizing: border-box;
     margin: 8px;
     color: rgb(255, 255, 255);
@@ -316,7 +316,7 @@ border-style:none;
 
 
 .draggable-set2:hover {
-    background-color: #0F75DB;
+    background-color: #2478cc;
 }
 
 
@@ -334,11 +334,11 @@ border-style:none;
    
    /*
     background-color: #2895FB;
-    outline-color: #00458A;
+    outline-color: #043B80;
    */
    
-   background-color: #0F75DB;
-   outline-color: #002D57;
+   background-color: #2478cc;
+   outline-color: #002357;
     z-index: 10000;
     box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
 }
@@ -355,10 +355,10 @@ border-style:none;
 
 .draggable-selected-set3 {
 
-   background-color: #0F75DB;
+   background-color: #2478cc;
    transform: translate(-4px, -4px);
     z-index: 10000;
-    box-shadow: 1px 1px 0px 0px #002D57, 2px 2px 0px 0px #002D57, 3px 3px 0px 0px #002D57, 4px 4px 0px 0px #002D57;
+    box-shadow: 1px 1px 0px 0px #002357, 2px 2px 0px 0px #002357, 3px 3px 0px 0px #002357, 4px 4px 0px 0px #002357;
 }
 
 .draggable-selected-set2:hover {
@@ -373,7 +373,7 @@ border-style:none;
     top: -7px;    /* Adjust these values */
     right: -7px;  /* Adjust these values */
     bottom: -7px; /* Adjust these values */
-    border: 2px solid #00458A;
+    border: 2px solid #043B80;
     outline-color: white;
     outline-width: 2px;
     outline-style: solid;
@@ -456,7 +456,7 @@ outline: solid;
 background-color: #d1e9ff;
 outline-width: 4px;
 outline-offset: -4px;
-outline-color:#00458A;
+outline-color:#043B80;
 pointer-events:all;
 }
 
@@ -467,7 +467,7 @@ pointer-events:all;
     cursor: pointer;
     outline-width: 6px;
     outline-offset: -6px;
-    outline-color:#0066cd;
+    outline-color:#2478CC;
 }
 
 .targetHighlight-weight-reduced {
@@ -491,7 +491,7 @@ pointer-events:all;
         background-color: #d1e9ff00;
         outline-width: 2px;
         outline-offset: -2px;
-        outline-color:#00458A;
+        outline-color:#043B80;
         position: relative;
         pointer-events:all;
         /* box-shadow: inset 4px 0px 0px 0px #2769a7, inset 0px 4px 0px 0px #5c96cc; */
@@ -562,12 +562,12 @@ pointer-events:all;
     outline-style: solid;
     outline-width: 2px;
     outline-offset: -2px;
-    outline-color:#0066cd;
+    outline-color:#2478CC;
 }
 
 .draggable-highlighted {
     outline: solid;
-    outline-color: #00458A;
+    outline-color: #043B80;
     outline-width: 4px;
     outline-offset: 2px;
     box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
@@ -576,7 +576,7 @@ pointer-events:all;
 
 .draggable-highlighted-thin-border  {
     outline: solid;
-    outline-color: #00458A;
+    outline-color: #043B80;
     outline-width: 3px !important;
     outline-offset: 2px;
     box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
@@ -584,7 +584,7 @@ pointer-events:all;
 
 .draggable-highlighted-thin-border:hover  {
     outline: solid;
-    outline-color: #00458A;
+    outline-color: #043B80;
     outline-width: 4px !important;
     outline-offset: 2px;
     box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
@@ -639,7 +639,7 @@ pointer-events:all;
     background-color: #b0d9ff;
     outline-width: 6px;
     outline-offset: -6px;
-    outline-color:#0066cd;
+    outline-color:#2478CC;
 }
 
 .target-dragged-over-set2 {
@@ -677,7 +677,7 @@ pointer-events:all;
     outline-style: solid;
     outline-width: 2px;
     outline-offset: -2px;
-    outline-color:#0066cd;
+    outline-color:#2478CC;
 }
 
 
@@ -689,7 +689,7 @@ pointer-events:all;
     top: -7px;    /* Adjust these values */
     right: -7px;  /* Adjust these values */
     bottom: -7px; /* Adjust these values */
-    border: 2px solid #00458A;
+    border: 2px solid #043B80;
     outline-color: white;
     outline-width: 2px;
     outline-style: solid;
@@ -706,7 +706,7 @@ pointer-events:all;
     /* right: -12px; */
     border: none;
     /* bottom: -12px; */
-    /* border: 2px solid #00458A; */
+    /* border: 2px solid #043B80; */
     outline-color: white;
     outline-width: 2px;
     outline-style: solid;
@@ -744,7 +744,7 @@ pointer-events:all;
     outline-width: 3px;
     outline-offset: 2px;
     background-color: white;
-    outline-color: #002D57;
+    outline-color: #002357;
     z-index: 10000;
     box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, 0.23);
 }
@@ -761,7 +761,7 @@ pointer-events:all;
     top: -8px;    /* Adjust these values */
     right: -8px;  /* Adjust these values */
     bottom: -8px; /* Adjust these values */
-    border: 2px solid #00458A;
+    border: 2px solid #043B80;
     outline-color: white;
     outline-width: 2px;
     outline-style: solid;
