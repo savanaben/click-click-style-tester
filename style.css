@@ -192,6 +192,21 @@ ul {
     box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
 }
 
+#customSVGDragImage {
+    outline-style: solid;
+    outline-width: 5px;
+   
+   /*
+    background-color: #2895FB;
+    outline-color: #043B80;
+   */
+   
+   background-color: #2478cc;
+   outline-color: #34a56b;
+
+    z-index: 10000;
+    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+}
 
 
 #customDragImage-set2 {
@@ -239,7 +254,7 @@ ul {
     border-radius: 4px;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
-    column-gap: 4px;
+    column-gap: 8px;
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -340,7 +355,7 @@ border-style:none;
    background-color: #2478cc;
    outline-color: #002357;
     z-index: 10000;
-    box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
+    box-shadow: 0px 2px 4px 5px rgba(0, 0, 0, 0.25)
 }
 
 
@@ -369,15 +384,16 @@ border-style:none;
 .draggable:focus-visible::after {
     content: '';
     position: absolute;
-    left: -7px;   /* Adjust these values */
-    top: -7px;    /* Adjust these values */
-    right: -7px;  /* Adjust these values */
-    bottom: -7px; /* Adjust these values */
+    left: -6px;   /* Adjust these values */
+    top: -6px;    /* Adjust these values */
+    right: -6px;  /* Adjust these values */
+    bottom: -6px; /* Adjust these values */
     border: 2px solid #043B80;
     outline-color: white;
-    outline-width: 2px;
+    outline-width: 1px;
     outline-style: solid;
-    outline-offset: -4px;
+    outline-offset: -3px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
 
@@ -388,7 +404,7 @@ border-style:none;
     align-items: center;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
-    column-gap: 4px;
+    column-gap: 12px;
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -399,7 +415,7 @@ border-style:none;
     margin-top: 24px;
     padding: 8px;
     position: relative;
-    row-gap: 4px;
+    row-gap: 12px;
     text-decoration-skip-ink: none;
     text-rendering: optimizelegibility;
     z-index: 200;
@@ -417,28 +433,70 @@ border-style:none;
 }
 
 .target {
-    border: 2px solid #545454;
+    box-shadow: inset 0 0 0 2px #545454;
     background-color: white;
-    margin: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 32px; /* Same padding as draggable buttons */
+    padding: 28px 44px; /* Same padding as draggable buttons */
     box-sizing: border-box;
     font-family: Calibri, system-ui, sans-serif;
     font-size: 24px;
     line-height: 26.4px;
     font-weight: 700;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.08);
     pointer-events: none;
 }
 
+.target-behind {
+    position: absolute;
+    /* width: 151.04px; */
+    /* height: 58.38px; */
+    background-color: #ffffff;
+    z-index: -1;
+    padding: 28px 44px;
+    white-space: nowrap;
+    border: none !important;
+    /* outline: 2px solid #545454; */
+    box-shadow: inset 0 0 0 2px #545454;
 
+}
 
+.svg-target-behind {
+    position: absolute;
+    /* width: 151.04px; */
+    /* height: 58.38px; */
+    background-color: #ffffff;
+    z-index: -1;
+    box-sizing: inherit;
+    padding: 14px;
+    white-space: nowrap;
+    border: none !important;
+    /* outline: 2px solid #545454; */
+    box-shadow: inset 0 0 0 2px #545454;
 
+}
+
+.draggable-container:hover .target-highlighted {
+    outline: solid;
+    background-color: #b0d9ff;
+    cursor: pointer;
+    outline-width: 4px !important;
+    outline-offset: -4px !important;
+    outline-color:#2478CC;
+}
+
+.draggable-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    margin: 4px;
+    align-items: center;
+}
 
 .border-weight-reduced {
-    border: 2px solid #353535; 
+
     outline-width: 3px !important;
     outline-offset: -3px !important;
 } 
@@ -454,8 +512,8 @@ border-style:none;
 .target-highlighted {
 outline: solid;
 background-color: #d1e9ff;
-outline-width: 4px;
-outline-offset: -4px;
+outline-width: 3px;
+outline-offset: -3px;
 outline-color:#043B80;
 pointer-events:all;
 }
@@ -566,33 +624,33 @@ pointer-events:all;
 }
 
 .draggable-highlighted {
-    outline: solid;
+    outline: none;
     outline-color: #043B80;
     outline-width: 4px;
     outline-offset: 2px;
-    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+    /* box-shadow: 0px 0px 0px 3px rgba(209,233,255,1); */
 }
 
 
 .draggable-highlighted-thin-border  {
-    outline: solid;
+    outline: none;
     outline-color: #043B80;
     outline-width: 3px !important;
     outline-offset: 2px;
-    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+    /* box-shadow: 0px 0px 0px 3px rgba(209,233,255,1); */
 }
 
 .draggable-highlighted-thin-border:hover  {
-    outline: solid;
+    outline: none;
     outline-color: #043B80;
     outline-width: 4px !important;
     outline-offset: 2px;
-    box-shadow: 0px 0px 0px 3px rgba(209,233,255,1);
+    /* box-shadow: 0px 0px 0px 3px rgba(209,233,255,1); */
 }
 
 
 .draggable-highlighted-set2 {
-    outline: solid;
+    outline: none;
     outline-color: #954f00;
     outline-width: 4px;
     outline-offset: 2px;
@@ -600,16 +658,16 @@ pointer-events:all;
 }
 
 .draggable-highlighted:hover {
-    outline: solid;
+    outline: none;
     outline-color: #006ad3;
     outline-width: 6px;
     outline-offset: 2px;
-    background-color: #677789;
+    filter: grayscale(80%) saturate(75%);
 }
 
 
 .draggable-highlighted-set2:hover {
-    outline: solid;
+    outline: none;
     outline-color: #ce6e00;
     outline-width: 6px;
     outline-offset: 2px;
@@ -618,11 +676,7 @@ pointer-events:all;
 }
 
 .draggable-highlighted-hover {
-    outline: solid;
-    outline-color: #006ad3;
-    outline-width: 6px;
-    outline-offset: 2px;
-    background-color: #658db5;
+    filter: grayscale(80%) brightness(130%);
 }
 
 .draggable-highlighted-hover-set2 {
@@ -637,8 +691,8 @@ pointer-events:all;
 .target-dragged-over {
     outline: solid;
     background-color: #b0d9ff;
-    outline-width: 6px;
-    outline-offset: -6px;
+    outline-width: 4px !important;
+    outline-offset: -4px !important;
     outline-color:#2478CC;
 }
 
@@ -685,15 +739,15 @@ pointer-events:all;
 [data-component="DropZone"].target-highlighted:focus-visible::after {
     content: '';
     position: absolute;
-    left: -7px;   /* Adjust these values */
-    top: -7px;    /* Adjust these values */
-    right: -7px;  /* Adjust these values */
-    bottom: -7px; /* Adjust these values */
+    left: -3px;   /* Adjust these values */
+    top: -3px;    /* Adjust these values */
+    right: -3px;  /* Adjust these values */
+    bottom: -3px; /* Adjust these values */
     border: 2px solid #043B80;
     outline-color: white;
-    outline-width: 2px;
+    outline-width: 1px;
     outline-style: solid;
-    outline-offset: -4px;
+    outline-offset: -3px;
 }
 
 .draggable-highlighted:focus-visible,
@@ -721,7 +775,7 @@ pointer-events:all;
 .draggable-highlighted:hover,
 .draggable-highlighted:focus-visible {
     /* Shared hover and focus styles */
-    background-color: #677789; /* Hover background color */
+
     outline-color: #006ad3; /* Hover outline color */
     outline-width: 6px; /* Hover outline width */
     outline-offset: 2px; /* Hover outline offset */
@@ -738,7 +792,7 @@ pointer-events:all;
     outline: none; /* Removes default browser focus outline */
 }
 
-/* Styles for selected SVG draggables */
+/* Styles for selected SVG draggables - ORIGINAL
 .SVG-default-style-selected {
     outline-style: solid;
     outline-width: 3px;
@@ -747,6 +801,19 @@ pointer-events:all;
     outline-color: #002357;
     z-index: 10000;
     box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, 0.23);
+} */
+
+
+/* Styles for selected SVG draggables */
+.SVG-default-style-selected {
+    outline-style: solid;
+    /* outline-offset: 1px; */
+    outline-width: 3px;
+    outline-offset: 2px;
+    background-color: white;
+    outline-color: #1159A7;
+    z-index: 10000;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 5px rgba(0, 0, 0, .25)
 }
 
 
@@ -763,15 +830,16 @@ pointer-events:all;
     bottom: -8px; /* Adjust these values */
     border: 2px solid #043B80;
     outline-color: white;
-    outline-width: 2px;
+    outline-width: 1px;
     outline-style: solid;
-    outline-offset: -4px;
-    z-index: 1000;
+    outline-offset: -3px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255);
 }
 
 .SVG-default-style {
     position: relative; /* Needed for absolute positioning of ::after */
     /* Rest of your styles */
+    margin: 8px;
 }
 
 .svg-faded {

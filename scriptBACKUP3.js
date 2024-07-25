@@ -188,109 +188,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function setupKeyboardNavigation() {
-    document.addEventListener('keydown', (event) => {
-        // Handle Esc key to reset selections and highlights and return focus
-        if (event.key === 'Escape' || event.key === 'Esc') {  // 'Esc' for older browsers
-            handleEscape(event);
-            return; // Early exit after handling Esc
-        }
+document.addEventListener('keydown', (event) => {
 
-        // Handle Enter or Space key on sourceTray or target
-        if (event.key === 'Enter' || event.key === ' ') { // Check for Enter or Space key
-            handleEnterOrSpace(event);
-            return; // Early exit after handling Enter or Space
-        }
-
-        // Handle arrow keys for navigation only if a draggable is selected
-        const selectedDraggable = document.querySelector('.draggable-selected, .SVG-default-style-selected');
-        if (selectedDraggable) {
-            if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && event.target.closest('.drag-drop-set')) {
-                event.preventDefault();
-                simplifiedHandleArrowNavigation(event);
-                return; // Early exit after handling navigation
-            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-                simplifiedHandleArrowNavigation(event); // Handle only left and right arrow keys
-                return; // Early exit after handling navigation
-            }
-        }
-    });
-}
-
-
-function handleEnterOrSpace(event) {
-    const target = event.target;
-
-    if (target.classList.contains('target-highlighted')) {
+    // Handle Esc key to reset selections and highlights and return focus
+    if (event.key === 'Escape' || event.key === 'Esc') {  // 'Esc' for older browsers
+        // Find the element that was previously selected
+        const previouslySelected = document.querySelector('[data-component="Draggable"][data-selected="true"]');
         resetSelectionAndHighlight();
+        if (previouslySelected) {
+            previouslySelected.focus();  // Return focus to the previously selected draggable
+        }
+        return; // Early exit after handling Esc
     }
 
-    // If a draggable within the sourceTray is selected, remove the valid-arrow-target class from the sourceTray
-    if (target.closest('.sourceTray')) {
-        const sourceTray = target.closest('.sourceTray');
-        sourceTray.classList.remove('valid-arrow-target');
+
+// Keydown event listener for handling Enter or Space key on sourceTray or target
+
+    if (event.key === 'Enter' || event.key === ' ') { // Check for Enter or Space key
+        const target = event.target;
+        if (target.classList.contains('sourceTray') || target.classList.contains('target')) {
+            resetSelectionAndHighlight();
+        }
     }
 
-    // If a draggable within the sourceTray is selected, remove the valid-arrow-target class from the sourceTray
-    const sourceTray = document.getElementById('source-tray-2');
-    if (sourceTray && target.closest('.draggable-container')) {
-        sourceTray.classList.add('valid-arrow-target');
+
+    // Explicitly prevent default behavior for up and down arrow keys within specific contexts
+    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && event.target.closest('.drag-drop-set')) {
+        event.preventDefault();
+        handleArrowNavigation(event);
+        return; // Early exit after handling navigation
     }
 
+
+ else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        handleArrowNavigation(event); // Handle only left and right arrow keys
+    }
+});
 }
 
-function handleEscape(event) {
-    // Find the element that was previously selected
-    const previouslySelected = document.querySelector('[data-component="Draggable"][data-selected="true"]');
-    resetSelectionAndHighlight();
-    if (previouslySelected) {
-        previouslySelected.focus();  // Return focus to the previously selected draggable
-    }
-}
 
 
-
-
-function simplifiedHandleArrowNavigation(event) {
+function handleArrowNavigation(event) {
     const activeElement = document.activeElement;
     const currentSet = activeElement.closest('.drag-drop-set');
     if (!currentSet) return;
 
-    // Define valid arrow key targets by class or ID
-    const validTargets = Array.from(currentSet.querySelectorAll('.valid-arrow-target, [data-component="Draggable"][data-selected="true"]'));
-
-
-    // Get the index of the currently focused element
-    const focusedIndex = validTargets.indexOf(activeElement);
+    const elements = Array.from(currentSet.querySelectorAll('.target-highlighted, .draggable-highlighted, [data-component="Draggable"], [data-component="DropZone"].target-highlighted'));
+    const focusedIndex = elements.indexOf(activeElement);
 
     let nextIndex = focusedIndex;
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-        nextIndex = focusedIndex - 1 < 0 ? validTargets.length - 1 : focusedIndex - 1;
-    } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-        nextIndex = (focusedIndex + 1) % validTargets.length;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+        nextIndex = focusedIndex - 1 < 0 ? elements.length - 1 : focusedIndex - 1;
+    } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+        nextIndex = (focusedIndex + 1) % elements.length;
     }
 
-    // Skip targets within the same container as the selected draggable
-    while (validTargets[nextIndex]) {
-        const container = validTargets[nextIndex].closest('.draggable-container', 'SVG-default-style-selected');
-        const isSelectedDraggable = validTargets[nextIndex].matches('[data-component="Draggable"][data-selected="true"]');
-
+    // Find the next focusable element that is not a target within a container with a selected draggable
+    while (elements[nextIndex]) {
+        const container = elements[nextIndex].closest('.draggable-container');
+        const isSelectedDraggable = elements[nextIndex].matches('[data-component="Draggable"][data-selected="true"]');
+        
         if (container) {
             const selectedDraggable = container.querySelector('.draggable-selected');
             // Allow focusing on the selected draggable but skip targets within the same container
             if (!selectedDraggable || isSelectedDraggable) {
                 break; // Found a valid element to focus
             }
-        } else if (isSelectedDraggable || !validTargets[nextIndex].matches('[data-component="Draggable"]')) {
+        } else if (isSelectedDraggable || !elements[nextIndex].matches('[data-component="Draggable"]')) {
             break; // Found a valid element to focus
         }
 
-
-        
         // Move to the next element
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-            nextIndex = nextIndex - 1 < 0 ? validTargets.length - 1 : nextIndex - 1;
-        } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-            nextIndex = (nextIndex + 1) % validTargets.length;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+            nextIndex = nextIndex - 1 < 0 ? elements.length - 1 : nextIndex - 1;
+        } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+            nextIndex = (nextIndex + 1) % elements.length;
         }
 
         // Prevent infinite loop
@@ -299,9 +271,9 @@ function simplifiedHandleArrowNavigation(event) {
         }
     }
 
-    if (validTargets[nextIndex]) {
+    if (elements[nextIndex]) {
         event.preventDefault();
-        validTargets[nextIndex].focus();
+        elements[nextIndex].focus();
     }
 }
 
@@ -453,7 +425,7 @@ function replaceFirstDragLocationWithSVG(svgContent, scaleUp) {
 
                 // Create the target-behind div
                 const targetBehind = document.createElement('div');
-                targetBehind.classList.add('target', 'svg-target-behind', 'valid-arrow-target');
+                targetBehind.classList.add('target', 'svg-target-behind');
                 targetBehind.setAttribute('id', `target-behind-${i + 1}`);
                 targetBehind.style.width = `${originalWidth}px`;
                 targetBehind.style.height = `${originalHeight}px`;
@@ -488,7 +460,6 @@ function replaceFirstDragLocationWithSVG(svgContent, scaleUp) {
 
 
 function toggleDraggableSelection(event) {
-       
     const target = event.currentTarget; // Use currentTarget to ensure you're getting the element with the event listener
     const isSelected = target.dataset.selected === "true";
     resetSelectionAndHighlight();
@@ -647,6 +618,7 @@ function applyCustomStyles(element) {
     element.style.outlineOffset = "2px";
     element.style.backgroundColor = "white";
     element.style.outlineColor = "#0050C6";
+    element.style.borderRadius = "3px";
     element.style.zIndex = "10000";
     element.style.boxShadow = "0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, 0.23)";
 }
@@ -803,6 +775,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const draggables = document.querySelectorAll('[data-component="Draggable"]');
 
@@ -812,41 +785,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
             e.preventDefault(); // Necessary to allow the drop
             if (draggable.classList.contains('draggable-highlighted')) {
                 draggable.classList.add('draggable-highlighted-hover');
-                
-                // Find the sibling target div and add the target-dragged-over class
-                const nearestTarget = draggable.parentElement.querySelector('.target');
-                if (nearestTarget) {
-                    nearestTarget.classList.add('target-dragged-over');
-                }
             }
         });
 
         // Add 'dragleave' event to remove the highlight when the drag leaves the element
         draggable.addEventListener('dragleave', (e) => {
             draggable.classList.remove('draggable-highlighted-hover');
-            
-            // Find the sibling target div and remove the target-dragged-over class
-            const nearestTarget = draggable.parentElement.querySelector('.target');
-            if (nearestTarget) {
-                nearestTarget.classList.remove('target-dragged-over');
-            }
         });
 
         // Add 'drop' event to handle the drop action
         draggable.addEventListener('drop', (e) => {
             e.preventDefault(); // Prevent default to handle the drop with JavaScript
             draggable.classList.remove('draggable-highlighted-hover');
-            
-            // Find the sibling target div and remove the target-dragged-over class
-            const nearestTarget = draggable.parentElement.querySelector('.target');
-            if (nearestTarget) {
-                nearestTarget.classList.remove('target-dragged-over');
-            }
-            
             // Here you might want to handle the drop based on additional conditions
         });
     });
 });
+
 
 
 
@@ -989,7 +944,6 @@ function closePopover() {
 
 
 function resetSelectionAndHighlight() {
-    
     // Reset draggable elements
     document.querySelectorAll(`.${classConfig.draggableSelected}, .SVG-default-style-selected`).forEach(el => {
         el.classList.remove(classConfig.draggableSelected, 'SVG-default-style-selected'); // Adjust as needed for SVG
@@ -1001,7 +955,6 @@ function resetSelectionAndHighlight() {
         target.classList.remove(classConfig.targetHighlighted, classConfig.targetDraggedOver, 'target-dragged-over');
         target.tabIndex = -1; // Reset tabindex
     });
-
 
     // Remove the 'draggableFaded' class from all elements
     document.querySelectorAll(`.${classConfig.draggableFaded}, .svg-faded`).forEach(el => {
@@ -1024,11 +977,6 @@ function resetSelectionAndHighlight() {
     document.querySelectorAll(`.${classConfig.draggableHighlighted}`).forEach(el => {
         el.classList.remove(classConfig.draggableHighlighted);
     });
-
-    // // Re-add the valid-arrow-target class to all sourceTrays
-    // document.querySelectorAll('.sourceTray').forEach(sourceTray => {
-    //     sourceTray.classList.add('valid-arrow-target');
-    // });
 
     // Reset tabindex for all targets as a catch-all
     updateTargetsTabindex(-1);

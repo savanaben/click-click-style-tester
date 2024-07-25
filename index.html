@@ -65,7 +65,7 @@
         </label>
         <label class="checkbox-container">
             Reduce target border weight:
-            <input type="checkbox" id="borderWeightToggle" name="borderWeightToggle" onchange="toggleBorderWeightFeature(this.checked)">
+            <input type="checkbox" id="borderWeightToggle" name="borderWeightToggle" onchange="toggleBorderWeightFeature(this.checked)" checked>
         </label>
         <button id="showPopoverButton">Show JIT instruction</button>        
     </div>
@@ -93,9 +93,9 @@
         </div>
         
         <div class="drag-location" role="radiogroup">
-            <div class="target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 1</span></div>
-            <div class="target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 2</span></div>
-            <div class="target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 3</span></div>
+            <div class="target valid-arrow-target" id="target1" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 1</span></div>
+            <div class="target valid-arrow-target" id="target2" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 2</span></div>
+            <div class="target valid-arrow-target" id="target3" style="position: relative;" tabindex="-1"><span class="hidden-text">Store 3</span></div>
         </div>
     </div>
 
@@ -110,7 +110,7 @@
 
 
     <div class="drag-drop-set">
-        <div data-component="DropZone" id="source-tray-2" tabindex="-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="sourceTray">
+        <div data-component="DropZone" id="source-tray-2" tabindex="-1" data-active="false" data-droppable="false" data-target-dropzone="false" role="list" class="sourceTray valid-arrow-target">
             <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-4" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable" data-selected="false">
                 Choice A
             </button>
@@ -126,14 +126,24 @@
         </div>
         
         <div class="drag-location" role="radiogroup">
-            <div class="target" id="target4" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
-            <div class="target" id="target5" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
+        
+            <div class="target valid-arrow-target" id="target4" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice A</span></div>
+            <div class="target valid-arrow-target" id="target5" style="position: relative;" tabindex="-1"><span class="hidden-text">Choice B</span></div>
+           
+            <div class="draggable-container">
             <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice C
             </button>
+            <div class="target target-behind valid-arrow-target" id="target-behind-1" tabindex="-1"><span class="hidden-text">Choice D</span></div>
+        </div>
+            
+        <div class="draggable-container">
             <button draggable="true" data-component="Draggable" aria-label="Draggable" aria-hidden="false" id="source-tray-a_draggable-6" role="button" tabindex="0" aria-disabled="false" aria-roledescription="draggable" aria-describedby="DndDescribedBy-16" class="draggable">
                 Choice D
             </button>
+            <div class="target target-behind valid-arrow-target" id="target-behind-1" tabindex="-1"><span class="hidden-text">Choice D</span></div>
+        </div>
+
         </div>
     </div>
 
