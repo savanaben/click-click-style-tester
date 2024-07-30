@@ -56,16 +56,16 @@
 
        <div class="styleSetsButtons">
         <button onclick="switchStyleSet('', this)">All blue</button>
-        <button onclick="switchStyleSet('set2', this)">Brown on select/drag</button>
+        <button disabled onclick="switchStyleSet('set2', this)">Brown on select/drag</button>
         <!-- <button onclick="switchStyleSet('set3', this)">3D</button> -->
         <!-- <button onclick="switchStyleSet('set3', this)">Reduce target border weight (requires art refactor)</button>         -->
         <label class="checkbox-container">
             Fade unselected options:
-            <input type="checkbox" id="fadingToggle" name="fadingToggle" onchange="toggleFadingFeature(this.checked)">
+            <input disabled type="checkbox" id="fadingToggle" name="fadingToggle" onchange="toggleFadingFeature(this.checked)">
         </label>
         <label class="checkbox-container">
             Reduce target border weight:
-            <input type="checkbox" id="borderWeightToggle" name="borderWeightToggle" onchange="toggleBorderWeightFeature(this.checked)" checked>
+            <input disabled type="checkbox" id="borderWeightToggle" name="borderWeightToggle" onchange="toggleBorderWeightFeature(this.checked)" checked>
         </label>
         <button id="showPopoverButton">Show JIT instruction</button>        
     </div>
