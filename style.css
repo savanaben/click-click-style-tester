@@ -684,7 +684,9 @@ pointer-events:all;
     outline-color: #006ad3;
     outline-width: 6px;
     outline-offset: 2px;
-    filter: grayscale(80%) saturate(75%);
+    background-color: #1159a7;
+   /* this added a graying effect when you hovered over */
+    /* filter: grayscale(80%) saturate(75%); */
 }
 
 
@@ -697,9 +699,10 @@ pointer-events:all;
     box-shadow: 0px 0px 0px 3px rgba(255, 225, 191, 1);
 }
 
-.draggable-highlighted-hover {
+/* this added a graying effect when you hovered over */
+/* .draggable-highlighted-hover {
     filter: grayscale(80%) brightness(130%);
-}
+} */
 
 .draggable-highlighted-hover-set2 {
     outline: solid;
