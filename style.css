@@ -185,16 +185,31 @@ ul {
     box-shadow: 0px 2px 4px 4px rgba(0, 0, 0, 0.23)
 } */
 
-  #customDragImage {
+
+
+/* drag style with border */
+  /* #customDragImage {
     outline-style: solid;
-    /* outline-offset: 1px; */
     outline-width: 3px;
     outline-offset: 2px;
     outline-color: #1159A7;
     background-color: #2478cc;
     z-index: 10000;
     box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .25)
+    } */
+
+
+    #customDragImage {
+    outline-style: none;
+    outline-width: 3px;
+    outline-offset: 2px;
+    background-color: #2478cc;;
+    outline-color: #1159A7;
+    transform: scale(1.05);
+    z-index: 10000;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, .20)
     }
+
 
 
 
@@ -296,6 +311,7 @@ ul {
     line-height: 26.4px;
 border-style:none;
     padding: 16px 32px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease; /* Add transition */
     text-align: start;
     text-decoration-skip-ink: none;
     text-rendering: optimizelegibility;
@@ -358,17 +374,35 @@ border-style:none;
     box-shadow: 0px 2px 4px 5px rgba(0, 0, 0, 0.25)
 } */
 
-.draggable-selected {
+
+
+
+
+/* This is the outline style with border */
+
+/* .draggable-selected {
 outline-style: solid;
-/* outline-offset: 1px; */
 outline-width: 3px;
 outline-offset: 2px;
 background-color: #2478cc;;
 outline-color: #1159A7;
 z-index: 10000;
 box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .25)
-}
+} */
 
+
+.draggable-selected {
+    outline-style: none;
+    /* outline-offset: 1px; */
+    outline-width: 3px;
+    outline-offset: 2px;
+    background-color: #2478cc;;
+    outline-color: #1159A7;
+    transform: scale(1.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease; /* Add transition */
+    z-index: 10000;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 4px rgba(0, 0, 0, .20)
+    }
 
 .draggable-selected-set2 {
     outline-style: solid;
@@ -432,9 +466,9 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     font-family: Calibri, system-ui, sans-serif;
     font-size: 24px;
-    justify-content: flex-start;
     line-height: 26.4px;
     margin-top: 24px;
     padding: 8px;
@@ -679,7 +713,7 @@ pointer-events:all;
     box-shadow: 0px 0px 0px 3px rgb(255 225 191);
 }
 
-.draggable-highlighted:hover {
+.draggable-highlighted.draggable:hover {
     outline: none;
     outline-color: #006ad3;
     outline-width: 6px;
@@ -689,6 +723,14 @@ pointer-events:all;
     /* filter: grayscale(80%) saturate(75%); */
 }
 
+.draggable-highlighted.SVG-default-style:hover {
+    outline: none;
+    outline-color: #006ad3;
+    outline-width: 6px;
+    outline-offset: 2px;
+   /* this added a graying effect when you hovered over */
+    /* filter: grayscale(80%) saturate(75%); */
+}
 
 .draggable-highlighted-set2:hover {
     outline: none;
@@ -817,6 +859,12 @@ pointer-events:all;
     outline: none; /* Removes default browser focus outline */
 }
 
+/* .SVG-default-style:hover {
+    background-color: white;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1);
+} */
+
+
 /* Styles for selected SVG draggables - ORIGINAL
 .SVG-default-style-selected {
     outline-style: solid;
@@ -829,19 +877,29 @@ pointer-events:all;
 } */
 
 
-/* Styles for selected SVG draggables */
-.SVG-default-style-selected {
+/* Styles for selected SVG draggables WITH BORDER */
+/* .SVG-default-style-selected {
     outline-style: solid;
-    /* outline-offset: 1px; */
     outline-width: 3px;
     outline-offset: 2px;
     background-color: white;
     outline-color: #1159A7;
     z-index: 10000;
     box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .25)
+} */
+
+/* Styles for selected SVG draggables WITHout BORDER */
+.SVG-default-style-selected {
+    outline-style: none;
+    outline-width: 3px;
+    outline-offset: 2px;
+    transform: scale(1.05);
+    background-color: white;
+    outline-color: #1159A7;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease; /* Add transition */
+    z-index: 10000;
+    box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 1px 4px 4px rgba(0, 0, 0, .20)
 }
-
-
 
 
 
@@ -865,6 +923,7 @@ pointer-events:all;
     position: relative; /* Needed for absolute positioning of ::after */
     /* Rest of your styles */
     margin: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease; /* Add transition */
 }
 
 .svg-faded {
