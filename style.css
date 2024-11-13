@@ -444,10 +444,10 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
 .draggable:focus-visible::after {
     content: '';
     position: absolute;
-    left: -8px;   /* Adjust these values */
-    top: -8px;    /* Adjust these values */
-    right: -8px;  /* Adjust these values */
-    bottom: -8px; /* Adjust these values */
+    left: -4px;   /* Adjust these values */
+    top: -4px;    /* Adjust these values */
+    right: -4px;  /* Adjust these values */
+    bottom: -4px; /* Adjust these values */
     border: 2px solid #043B80;
     outline-color: white;
     outline-width: 1px;
@@ -462,7 +462,7 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
     align-items: center;
     box-sizing: border-box;
     color: rgb(0, 0, 0);
-    column-gap: 12px;
+    column-gap: 16px;
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -502,7 +502,7 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
     font-size: 24px;
     line-height: 26.4px;
     font-weight: 700;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .target-behind {
@@ -534,10 +534,10 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
 
 .draggable-container:hover .target-highlighted {
     outline: solid;
-    background-color: #b0d9ff;
+    background-color: rgb(6 131 255 / 30%);
     cursor: pointer;
-    outline-width: 4px !important;
-    outline-offset: -4px !important;
+    outline-width: 3px !important;
+    outline-style: dashed;
     outline-color:#2478CC;
 }
 
@@ -564,24 +564,31 @@ box-shadow: 0px 0px 0px 2px rgba(255,255,255,1), 0px 2px 4px 6px rgba(0, 0, 0, .
     outline-offset: -4px !important;
 }
 
-
-.target-highlighted {
+/* old style with outlines not dashed */
+/* .target-highlighted {
 outline: solid;
 background-color: #d1e9ff;
 outline-width: 3px;
 outline-offset: -3px;
 outline-color:#043B80;
 pointer-events:all;
+} */
+
+.target-highlighted {
+    background-color: rgba(36, 120, 204, 0.2);
+    outline-color: #1159a7;
+    outline-style: dashed;
+    outline-width: 2px !important;
+    box-shadow: inset 0 0 0 4px #ffffff, 0 0 0 0px #ffffff, 0px 3px 5px 1px rgba(0, 0, 0, 0.12);
 }
 
-
 .target-highlighted:hover {
-    outline: solid;
-    background-color: #b0d9ff;
+    background-color: rgb(6 131 255 / 30%);
     cursor: pointer;
-    outline-width: 6px;
-    outline-offset: -6px;
-    outline-color:#2478CC;
+    outline-style: dashed;
+    outline-width: 3px !important;
+    outline-color:#1159a7;
+    box-shadow: inset 0 0 0 5px #ffffff, 0 0 0 0px #ffffff, 0px 3px 5px 1px rgba(0, 0, 0, 0.12);
 }
 
 .targetHighlight-weight-reduced {
@@ -756,11 +763,12 @@ pointer-events:all;
 
 
 .target-dragged-over {
-    outline: solid;
-    background-color: #b0d9ff;
-    outline-width: 4px !important;
-    outline-offset: -4px !important;
-    outline-color:#2478CC;
+    background-color: rgb(6 131 255 / 30%);
+    cursor: pointer;
+    outline-style: dashed;
+    outline-width: 3px !important;
+    outline-color:#1159a7;
+    box-shadow: inset 0 0 0 5px #ffffff, 0 0 0 0px #ffffff, 0px 3px 5px 1px rgba(0, 0, 0, 0.12);
 }
 
 .target-dragged-over-set2 {
@@ -907,10 +915,10 @@ pointer-events:all;
 .SVG-focus-state:focus-visible::after {
     content: '';
     position: absolute;
-    left: -8px;   /* Adjust these values */
-    top: -8px;    /* Adjust these values */
-    right: -8px;  /* Adjust these values */
-    bottom: -8px; /* Adjust these values */
+    left: -4px;   /* Adjust these values */
+    top: -4px;    /* Adjust these values */
+    right: -4px;  /* Adjust these values */
+    bottom: -4px; /* Adjust these values */
     border: 2px solid #043B80;
     outline-color: white;
     outline-width: 1px;
